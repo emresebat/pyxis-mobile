@@ -1,3 +1,6 @@
+import 'package:flutter_app/resources/pages/settings_page.dart';
+import 'package:flutter_app/resources/widgets/buttons/buttons.dart';
+
 import '/resources/widgets/theme_toggle_widget.dart';
 import '/app/networking/api_service.dart';
 import '/bootstrap/extensions.dart';
@@ -19,6 +22,8 @@ class _HomePageState extends NyPage<HomePage> {
 
   @override
   get init => () async {
+        await Future.delayed(const Duration(seconds: 1));
+
         /// Uncomment the code below to fetch the number of stars for the Nylo repository
         // Map<String, dynamic>? githubResponse = await api<ApiService>(
         //         (request) => request.githubInfo(),
@@ -30,7 +35,7 @@ class _HomePageState extends NyPage<HomePage> {
   /// Options: LoadingStyle.normal(), LoadingStyle.skeletonizer(), LoadingStyle.none()
   /// uncomment the code below.
   @override
-  LoadingStyle get loadingStyle => LoadingStyle.normal();
+  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
 
   /// The [view] method displays your page.
   @override
@@ -164,6 +169,12 @@ class _HomePageState extends NyPage<HomePage> {
                 "Framework Version: $nyloVersion",
               ).bodyMedium().setColor(context, (color) => Colors.grey),
               ThemeToggle(),
+              const SizedBox(
+                height: 50,
+              ),
+              Button.primary(
+                  text: "Settings",
+                  onPressed: () => routeTo(SettingsPage.path)),
             ],
           ),
         ],

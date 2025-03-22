@@ -38,6 +38,7 @@ class Boot {
 |-------------------------------------------------------------------------- */
 
 _setup() async {
+  await Future.delayed(const Duration(seconds: 1));
   /// Example: Initializing StorageConfig
   // StorageConfig.init(
   //   androidOptions: AndroidOptions(
