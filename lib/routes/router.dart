@@ -1,3 +1,4 @@
+import '/resources/pages/supabase_login_page.dart';
 import '/resources/pages/signup_page.dart';
 import '/resources/pages/base_navigation_hub.dart';
 import '/resources/pages/login_page.dart';
@@ -37,8 +38,7 @@ appRouter() => nyRoutes((router) {
       //
       // });
       router.add(NotFoundPage.path).unknownRoute();
-      // router.add(SettingsPage.path).authenticatedRoute();
-      router.add(LoginPage.path).initialRoute();
       router.add(BaseNavigationHub.path).authenticatedRoute();
+      router.add(SupabaseLoginPage.path).initialRoute();
       router.add(SignupPage.path);
-});
+    });

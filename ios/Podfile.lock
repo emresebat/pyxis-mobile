@@ -1,6 +1,8 @@
 PODS:
   - app_badge_plus (1.2.0):
     - Flutter
+  - app_links (0.0.2):
+    - Flutter
   - apple_maps_flutter (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -13,6 +15,8 @@ PODS:
   - geolocator_apple (1.2.0):
     - Flutter
     - FlutterMacOS
+  - image_picker_ios (0.0.1):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -24,12 +28,14 @@ PODS:
 
 DEPENDENCIES:
   - app_badge_plus (from `.symlinks/plugins/app_badge_plus/ios`)
+  - app_links (from `.symlinks/plugins/app_links/ios`)
   - apple_maps_flutter (from `.symlinks/plugins/apple_maps_flutter/ios`)
   - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - flutter_timezone (from `.symlinks/plugins/flutter_timezone/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/darwin`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -37,6 +43,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   app_badge_plus:
     :path: ".symlinks/plugins/app_badge_plus/ios"
+  app_links:
+    :path: ".symlinks/plugins/app_links/ios"
   apple_maps_flutter:
     :path: ".symlinks/plugins/apple_maps_flutter/ios"
   Flutter:
@@ -49,6 +57,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_timezone/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/darwin"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
@@ -58,12 +68,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_badge_plus: 3227d759d2a54e4fc28ec806596ec3b740c3c17a
+  app_links: f3e17e4ee5e357b39d8b95290a9b2c299fca71c6
   apple_maps_flutter: c59725efea39e13e703cde52a1d2b14866ad68a8
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_local_notifications: df98d66e515e1ca797af436137b4459b160ad8c9
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   flutter_timezone: ac3da59ac941ff1c98a2e1f0293420e020120282
   geolocator_apple: 66b711889fd333205763b83c9dcf0a57a28c7afd
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
