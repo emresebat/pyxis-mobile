@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/events/login_event.dart';
+import 'package:hyperplace/app/events/login_event.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class LoginPage extends NyStatefulWidget {
@@ -18,15 +18,26 @@ class _LoginPageState extends NyPage<LoginPage> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Login"),
+      // ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                "public/images/logo.png",
+                height: 100,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "Own your location",
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
               NyTextField.emailAddress(
                 controller: _emailController,
                 decoration: InputDecoration(

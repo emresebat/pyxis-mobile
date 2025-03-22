@@ -4,8 +4,8 @@
 # Official repository: https://github.com/nylo-core/nylo
 # Author: Anthony Gordon <https://github.com/agordn52>
 
-name: flutter_app
-description: A new Nylo Flutter application.
+name: hyperplace
+description: At its core a Hyperplace is a place which has a number of location-related properties to help people make better use of their location in order to create a personalised experience they have full control over.
 
 publish_to: 'none'
 

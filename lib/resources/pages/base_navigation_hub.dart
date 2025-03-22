@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/widgets/chat_tab_widget.dart';
-import 'package:flutter_app/resources/widgets/nearme_tab_widget.dart';
-import 'package:flutter_app/resources/widgets/places_tab_widget.dart';
-import 'package:flutter_app/resources/widgets/profile_tab_widget.dart';
+import 'package:hyperplace/resources/widgets/chat_tab_widget.dart';
+import 'package:hyperplace/resources/widgets/nearme_tab_widget.dart';
+import 'package:hyperplace/resources/widgets/places_tab_widget.dart';
+import 'package:hyperplace/resources/widgets/profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class BaseNavigationHub extends NyStatefulWidget with BottomNavPageControls {

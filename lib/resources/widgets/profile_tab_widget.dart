@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/events/logout_event.dart';
-import 'package:flutter_app/resources/widgets/buttons/buttons.dart';
+import 'package:hyperplace/app/events/logout_event.dart';
+import 'package:hyperplace/resources/widgets/buttons/buttons.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class ProfileTab extends StatefulWidget {

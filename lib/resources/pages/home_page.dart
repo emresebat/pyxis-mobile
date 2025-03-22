@@ -1,5 +1,5 @@
-import 'package:flutter_app/resources/pages/settings_page.dart';
-import 'package:flutter_app/resources/widgets/buttons/buttons.dart';
+import 'package:hyperplace/resources/pages/settings_page.dart';
+import 'package:hyperplace/resources/widgets/buttons/buttons.dart';
 
 import '/resources/widgets/theme_toggle_widget.dart';
 import '/app/networking/api_service.dart';
