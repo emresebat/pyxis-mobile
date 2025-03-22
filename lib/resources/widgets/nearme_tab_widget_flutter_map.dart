@@ -1,5 +1,6 @@
-import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -11,18 +12,12 @@ class NearmeTab extends StatefulWidget {
 }
 
 class _NearmeTabState extends NyState<NearmeTab> {
+  late MapController _mapController;
   LatLng? _currentLocation;
-  bool _isLoading = true;
-
-  late AppleMapController? mapController;
-  Map<AnnotationId, Annotation> annotations = <AnnotationId, Annotation>{};
-
-  void _onMapCreated(AppleMapController controller) {
-    mapController = controller;
-  }
 
   @override
   get init => () {
+        _mapController = MapController();
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _fetchUserLocation();
         });
@@ -36,7 +31,6 @@ class _NearmeTabState extends NyState<NearmeTab> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       // Handle location services not enabled
-      setState(() => _isLoading = false);
       return;
     }
 
@@ -46,14 +40,12 @@ class _NearmeTabState extends NyState<NearmeTab> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         // Handle permission denied
-        setState(() => _isLoading = false);
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       // Handle permission permanently denied
-      setState(() => _isLoading = false);
       return;
     }
 
@@ -61,37 +53,41 @@ class _NearmeTabState extends NyState<NearmeTab> {
     Position position = await Geolocator.getCurrentPosition();
     setState(() {
       _currentLocation = LatLng(position.latitude, position.longitude);
-      annotations[AnnotationId('current_location')] = Annotation(
-        annotationId: AnnotationId('current_location'),
-        position: _currentLocation!,
-        infoWindow: const InfoWindow(title: 'You are here'),
-      );
-      _isLoading = false;
+      if (_currentLocation != null) {
+        _mapController.move(
+            _currentLocation!, 15.0); // Center map on user's location
+      }
     });
   }
 
   @override
   Widget view(BuildContext context) {
-    if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(), // Show loading indicator
-      );
-    }
-
-    if (_currentLocation == null) {
-      return const Center(
-        child:
-            Text("Unable to fetch location"), // Handle location fetch failure
-      );
-    }
-
-    return AppleMap(
-      onMapCreated: _onMapCreated,
-      initialCameraPosition: CameraPosition(
-        target: _currentLocation!,
-        zoom: 15.0,
+    return FlutterMap(
+      mapController: _mapController,
+      options: MapOptions(
+        initialCenter: _currentLocation ??
+            LatLng(0, 0), // Default to (0, 0) if location is null
+        initialZoom: 15.0,
       ),
-      annotations: Set<Annotation>.of(annotations.values),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          subdomains: ['a', 'b', 'c'],
+        ),
+        if (_currentLocation != null)
+          MarkerLayer(
+            markers: [
+              Marker(
+                point: _currentLocation!,
+                child: const Icon(
+                  Icons.location_pin,
+                  color: Colors.red,
+                  size: 40,
+                ),
+              ),
+            ],
+          ),
+      ],
     );
   }
 }

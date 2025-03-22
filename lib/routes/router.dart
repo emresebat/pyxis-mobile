@@ -1,3 +1,4 @@
+import '/resources/pages/signup_page.dart';
 import '/resources/pages/base_navigation_hub.dart';
 import '/resources/pages/login_page.dart';
 import '/resources/pages/settings_page.dart';
@@ -39,4 +40,5 @@ appRouter() => nyRoutes((router) {
       // router.add(SettingsPage.path).authenticatedRoute();
       router.add(LoginPage.path).initialRoute();
       router.add(BaseNavigationHub.path).authenticatedRoute();
-    });
+      router.add(SignupPage.path);
+});
