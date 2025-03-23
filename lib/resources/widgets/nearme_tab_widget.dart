@@ -72,26 +72,20 @@ class _NearmeTabState extends NyState<NearmeTab> {
 
   @override
   Widget view(BuildContext context) {
-    if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(), // Show loading indicator
-      );
-    }
-
-    if (_currentLocation == null) {
-      return const Center(
-        child:
-            Text("Unable to fetch location"), // Handle location fetch failure
-      );
-    }
-
-    return AppleMap(
-      onMapCreated: _onMapCreated,
-      initialCameraPosition: CameraPosition(
-        target: _currentLocation!,
-        zoom: 15.0,
-      ),
-      annotations: Set<Annotation>.of(annotations.values),
+    return Scaffold(
+      appBar: AppBar(title: Text('Near Me')),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : AppleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: _currentLocation!,
+                zoom: 15.0,
+              ),
+              annotations: Set<Annotation>.of(annotations.values),
+            ),
     );
   }
 }

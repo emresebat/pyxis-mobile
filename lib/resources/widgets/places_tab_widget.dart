@@ -14,8 +14,9 @@ class _PlacesTabState extends NyState<PlacesTab> {
 
   @override
   Widget view(BuildContext context) {
-    return Container(
-      child: Center(
+    return Scaffold(
+      appBar: AppBar(title: Text('Places')),
+      body: Center(
         child: Text("Places Tab"),
       ),
     );

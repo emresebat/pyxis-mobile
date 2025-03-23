@@ -14,9 +14,10 @@ class _ChatTabState extends NyState<ChatTab> {
 
   @override
   Widget view(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Chat Tab"),
+    return Scaffold(
+      appBar: AppBar(title: Text('Chat')),
+      body: Center(
+        child: Text("Chats Tab"),
       ),
     );
   }

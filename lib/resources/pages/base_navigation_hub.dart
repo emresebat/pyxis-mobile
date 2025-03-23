@@ -3,6 +3,7 @@ import 'package:hyperplace/resources/widgets/chat_tab_widget.dart';
 import 'package:hyperplace/resources/widgets/nearme_tab_widget.dart';
 import 'package:hyperplace/resources/widgets/places_tab_widget.dart';
 import 'package:hyperplace/resources/widgets/profile_tab_widget.dart';
+import 'package:hyperplace/resources/widgets/user_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class BaseNavigationHub extends NyStatefulWidget with BottomNavPageControls {
@@ -37,7 +38,7 @@ class _BaseNavigationHubState extends NavigationHub<BaseNavigationHub> {
             0: NavigationTab(
               title: "Profile",
               page:
-                  ProfileTab(), // create using: 'dart run nylo_framework:main make:stateful_widget home_tab'
+                  UserTab(), // create using: 'dart run nylo_framework:main make:stateful_widget home_tab'
               icon: Icon(Icons.person_outline),
               activeIcon: Icon(Icons.person),
             ),

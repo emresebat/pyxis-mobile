@@ -1,5 +1,6 @@
+import '/app/models/profile_section.dart';
 import '/app/controllers/home_controller.dart';
-import '/app/models/user.dart';
+import '../app/models/profile.dart';
 import '/app/networking/api_service.dart';
 
 /* Model Decoders
@@ -13,12 +14,10 @@ import '/app/networking/api_service.dart';
 final Map<Type, dynamic> modelDecoders = {
   Map<String, dynamic>: (data) => Map<String, dynamic>.from(data),
 
-  List<User>: (data) =>
-      List.from(data).map((json) => User.fromJson(json)).toList(),
+  List<Profile>: (data) =>
+      List.from(data).map((json) => Profile.fromJson(json)).toList(),
   //
-  User: (data) => User.fromJson(data),
-
-  // User: (data) => User.fromJson(data),
+  Profile: (data) => Profile.fromJson(data),
 };
 
 /* API Decoders

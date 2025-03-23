@@ -4,9 +4,11 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Avatar extends StatefulWidget {
-  const Avatar({super.key, this.imageUrl, required this.onUpload});
+  const Avatar(
+      {super.key, this.initials, this.imageUrl, required this.onUpload});
 
   final String? imageUrl;
+  final String? initials;
   final void Function(String) onUpload;
 
   @override
@@ -61,22 +63,32 @@ class _AvatarState extends NyState<Avatar> {
   Widget view(BuildContext context) {
     return Column(
       children: [
-        if (widget.imageUrl == null || widget.imageUrl!.isEmpty)
-          Container(
-            width: 150,
-            height: 150,
-            color: Colors.grey,
-            child: const Center(
-              child: Text('No Image'),
-            ),
-          )
-        else
-          Image.network(
-            widget.imageUrl!,
-            width: 150,
-            height: 150,
-            fit: BoxFit.cover,
-          ),
+        CircleAvatar(
+          radius: 50,
+          backgroundColor: Colors.grey,
+          child: widget.imageUrl == null || widget.imageUrl!.isEmpty
+              ? Text(widget.initials ?? '')
+              : null,
+          backgroundImage: widget.imageUrl == null || widget.imageUrl!.isEmpty
+              ? null
+              : NetworkImage(widget.imageUrl!),
+        ),
+        // if (widget.imageUrl == null || widget.imageUrl!.isEmpty)
+        //   Container(
+        //     width: 150,
+        //     height: 150,
+        //     color: Colors.grey,
+        //     child: const Center(
+        //       child: Text('No Image'),
+        //     ),
+        //   )
+        // else
+        //   Image.network(
+        //     widget.imageUrl!,
+        //     width: 150,
+        //     height: 150,
+        //     fit: BoxFit.cover,
+        //   ),
         ElevatedButton(
           onPressed: _isLoading ? null : _upload,
           child: const Text('Upload'),

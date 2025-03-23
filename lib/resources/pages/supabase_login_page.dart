@@ -107,6 +107,11 @@ class _SupabaseLoginPageState extends NyPage<SupabaseLoginPage> {
                 onPressed: _isLoading ? null : _signIn,
                 child: Text(_isLoading ? 'Sending...' : 'Send Magic Link'),
               ),
+              const SizedBox(height: 18),
+              ElevatedButton(
+                onPressed: _isLoading ? null : _signIn,
+                child: Text(_isLoading ? 'Connecting...' : 'Connect Wallet'),
+              ),
             ],
           )),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyperplace/app/events/logout_event.dart';
+import 'package:hyperplace/app/models/profile.dart';
 import 'package:hyperplace/resources/widgets/avatar_widget.dart';
 import 'package:hyperplace/resources/widgets/buttons/buttons.dart';
 import 'package:nylo_framework/nylo_framework.dart';
@@ -17,6 +18,7 @@ class _ProfileTabState extends NyState<ProfileTab> {
   final _fullNameController = TextEditingController();
   String? _avatarUrl;
   var _loading = true;
+  Profile? _profile;
 
   final supabase = Supabase.instance.client;
 
@@ -34,9 +36,10 @@ class _ProfileTabState extends NyState<ProfileTab> {
       final userId = supabase.auth.currentSession!.user.id;
       final data =
           await supabase.from('profiles').select().eq('id', userId).single();
-      _usernameController.text = (data['username'] ?? '') as String;
-      _fullNameController.text = (data['full_name'] ?? '') as String;
-      _avatarUrl = (data['avatar_url'] ?? '') as String;
+      _profile = Profile.fromJson(data);
+      _usernameController.text = _profile?.username ?? '';
+      _fullNameController.text = _profile?.fullName ?? '';
+      _avatarUrl = _profile?.avatarUrl;
     } on PostgrestException catch (error) {
       if (mounted) showToastOops(description: error.message);
     } catch (error) {
@@ -130,7 +133,7 @@ class _ProfileTabState extends NyState<ProfileTab> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Sign In')),
+      appBar: AppBar(title: const Text('Edit Profile')),
       body: Container(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -140,6 +143,7 @@ class _ProfileTabState extends NyState<ProfileTab> {
               Avatar(
                 imageUrl: _avatarUrl,
                 onUpload: _onUpload,
+                initials: _profile?.initials,
               ),
               const SizedBox(height: 18),
               TextFormField(

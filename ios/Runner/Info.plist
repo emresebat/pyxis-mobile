@@ -85,5 +85,13 @@
 		<string>We need this for your profile</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>We need this for your profile</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>metamask</string>
+			<string>trust</string>
+			<string>safe</string>
+			<string>rainbow</string>
+			<!-- Add other wallet schemes names here -->
+		</array>
 	</dict>
 </plist>
