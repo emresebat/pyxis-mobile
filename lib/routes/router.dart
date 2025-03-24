@@ -1,8 +1,8 @@
-import '/resources/pages/supabase_login_page.dart';
+import '/resources/pages/choose_login_page.dart';
+import '../resources/pages/link_login_page.dart';
 import '/resources/pages/signup_page.dart';
 import '/resources/pages/base_navigation_hub.dart';
 import '/resources/pages/login_page.dart';
-import '/resources/pages/settings_page.dart';
 import '/resources/pages/not_found_page.dart';
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
@@ -25,6 +25,9 @@ import 'package:nylo_framework/nylo_framework.dart';
 |-------------------------------------------------------------------------- */
 
 appRouter() => nyRoutes((router) {
+      const noTransition = PageTransitionSettings(
+          duration: Duration(milliseconds: 0),
+          reverseDuration: Duration(milliseconds: 0));
       router.add(HomePage.path);
       // Add your routes here ...
 
@@ -37,8 +40,16 @@ appRouter() => nyRoutes((router) {
       // }, (router) {
       //
       // });
-      router.add(NotFoundPage.path).unknownRoute();
-      router.add(BaseNavigationHub.path).authenticatedRoute();
-      router.add(SupabaseLoginPage.path).initialRoute();
-      router.add(SignupPage.path);
+      router
+          .add(NotFoundPage.path, pageTransitionSettings: noTransition)
+          .unknownRoute();
+      router
+          .add(BaseNavigationHub.path, pageTransitionSettings: noTransition)
+          .authenticatedRoute();
+      router
+          .add(ChooseLoginPage.path, pageTransitionSettings: noTransition)
+          .initialRoute();
+      router.add(SignupPage.path, pageTransitionSettings: noTransition);
+      router.add(LoginPage.path, pageTransitionSettings: noTransition);
+      router.add(LinkLoginPage.path, pageTransitionSettings: noTransition);
     });

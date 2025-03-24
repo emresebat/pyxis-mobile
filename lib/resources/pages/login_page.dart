@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:hyperplace/app/events/login_event.dart';
+import 'package:plateau/app/controllers/login_controller.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/app/events/login_event.dart';
+import 'package:plateau/app/forms/login_form.dart';
+import 'package:plateau/app/models/login_request.dart';
+import 'package:plateau/bootstrap/extensions.dart';
+import 'package:plateau/resources/widgets/buttons/buttons.dart';
+import 'package:plateau/resources/widgets/logo_widget.dart';
 
-class LoginPage extends NyStatefulWidget {
+class LoginPage extends NyStatefulWidget<LoginController> {
   static RouteView path = ("/login", (_) => LoginPage());
 
   LoginPage({super.key}) : super(child: () => _LoginPageState());
 }
 
 class _LoginPageState extends NyPage<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  LoginForm form = LoginForm();
 
   @override
   get init => () {};
@@ -18,74 +23,47 @@ class _LoginPageState extends NyPage<LoginPage> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Login"),
-      // ),
+      appBar: AppBar(
+        backgroundColor: context.color.surfaceBackground,
+        title: Logo(height: 80),
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        child: Container(
+          padding: const EdgeInsets.all(18.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "public/images/logo.png",
-                height: 100,
-              ),
-              const SizedBox(height: 20),
-              Text(
-                "Own your location",
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              NyTextField.emailAddress(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: "Email",
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(height: 16),
-              NyTextField.password(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle login logic here
-                  final email = _emailController.text;
-                  final password = _passwordController.text;
-                  print("Email: $email, Password: $password");
-
-                  validate(
-                      rules: {
-                        "email": [
-                          email,
-                          FormValidator.email(message: "Invalid email address")
-                              .rules
-                        ],
-                        "password": [
-                          password,
-                          FormValidator.password(
-                                  strength: 1,
-                                  message:
-                                      "Password must be at least 8 characters")
-                              .rules
-                        ],
-                      },
-                      onSuccess: () => event<LoginEvent>(data: {
-                            "email": email,
-                            "password": password,
-                          }));
-                },
-                child: Text("Login"),
-              ),
+              NyForm(
+                  form: form,
+                  footer: Column(
+                    children: [
+                      Button.primary(
+                        onPressed: () {
+                          form.submit(onSuccess: (data) async {
+                            // Do something with the data
+                            var loginRequest = LoginRequest.fromJson(data);
+                            var result =
+                                await widget.controller.onLogin(loginRequest);
+                            if (result.success) {
+                              // redirect to home
+                              event<LoginEvent>();
+                            } else {
+                              showToastOops(description: result.error);
+                            }
+                          });
+                        },
+                        text: "Login",
+                      ),
+                      const SizedBox(height: 18),
+                      Button.secondary(
+                        onPressed: () {
+                          pop();
+                        },
+                        text: "Back",
+                      )
+                    ],
+                  )),
             ],
           ),
         ),

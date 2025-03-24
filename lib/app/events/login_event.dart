@@ -1,4 +1,4 @@
-import 'package:hyperplace/resources/pages/base_navigation_hub.dart';
+import 'package:plateau/resources/pages/base_navigation_hub.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class LoginEvent implements NyEvent {

@@ -2,18 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hyperplace/app/events/login_event.dart';
+import 'package:plateau/app/events/login_event.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/bootstrap/extensions.dart';
+import 'package:plateau/resources/pages/choose_login_page.dart';
+import 'package:plateau/resources/widgets/buttons/buttons.dart';
+import 'package:plateau/resources/widgets/logo_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseLoginPage extends NyStatefulWidget {
-  static RouteView path = ("/login", (_) => SupabaseLoginPage());
+class LinkLoginPage extends NyStatefulWidget {
+  static RouteView path = ("/link-login", (_) => LinkLoginPage());
 
-  SupabaseLoginPage({super.key})
-      : super(child: () => _SupabaseLoginPageState());
+  LinkLoginPage({super.key}) : super(child: () => _LinkLoginPageState());
 }
 
-class _SupabaseLoginPageState extends NyPage<SupabaseLoginPage> {
+class _LinkLoginPageState extends NyPage<LinkLoginPage> {
   bool _isLoading = false;
   bool _redirecting = false;
   late final TextEditingController _emailController = TextEditingController();
@@ -81,37 +84,37 @@ class _SupabaseLoginPageState extends NyPage<SupabaseLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Sign In')),
+      appBar: AppBar(
+        backgroundColor: context.color.surfaceBackground,
+        title: Logo(height: 80),
+      ),
       body: Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "public/images/logo.png",
-                height: 100,
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Sign in via the magic link with your email below',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 18),
+              // const Text(
+              //   'Sign in via the magic link with your email below',
+              //   textAlign: TextAlign.center,
+              // ),
+              // const SizedBox(height: 18),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
               ),
               const SizedBox(height: 18),
-              ElevatedButton(
+              Button.primary(
                 onPressed: _isLoading ? null : _signIn,
-                child: Text(_isLoading ? 'Sending...' : 'Send Magic Link'),
+                text: _isLoading ? 'Sending...' : 'Send Magic Link',
               ),
               const SizedBox(height: 18),
-              ElevatedButton(
-                onPressed: _isLoading ? null : _signIn,
-                child: Text(_isLoading ? 'Connecting...' : 'Connect Wallet'),
-              ),
+              Button.secondary(
+                onPressed: () {
+                  pop();
+                },
+                text: "Back",
+              )
             ],
           )),
     );

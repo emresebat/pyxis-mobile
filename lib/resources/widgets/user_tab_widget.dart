@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hyperplace/app/models/profile.dart';
-import 'package:hyperplace/app/models/profile_section.dart';
-import 'package:hyperplace/resources/widgets/avatar_widget.dart';
-import 'package:hyperplace/resources/widgets/profile_tab_widget.dart';
+import 'package:plateau/app/events/logout_event.dart';
+import 'package:plateau/app/models/profile.dart';
+import 'package:plateau/app/models/profile_section.dart';
+import 'package:plateau/resources/widgets/avatar_widget.dart';
+import 'package:plateau/resources/widgets/profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -47,10 +48,29 @@ class _UserTabState extends NyState<UserTab> {
     }
   }
 
+  Future<void> _signOut() async {
+    try {
+      await supabase.auth.signOut();
+    } on AuthException catch (error) {
+      if (mounted) showToastOops(description: error.message);
+    } catch (error) {
+      if (mounted) {
+        showToastOops(description: 'Unexpected error occurred');
+      }
+    } finally {
+      event<LogoutEvent>();
+    }
+  }
+
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('${_profile?.username} \'s Profile')),
+      appBar: AppBar(
+        title: Text('${_profile?.username} \'s Profile'),
+        actions: [
+          TextButton(onPressed: _signOut, child: const Text('Sign Out')),
+        ],
+      ),
       body: _loading
           ? CircularProgressIndicator()
           : Container(

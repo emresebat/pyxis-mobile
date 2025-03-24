@@ -1,3 +1,5 @@
+import '/app/models/login_request.dart';
+import '/app/controllers/login_controller.dart';
 import '/app/models/profile_section.dart';
 import '/app/controllers/home_controller.dart';
 import '../app/models/profile.dart';
@@ -18,6 +20,10 @@ final Map<Type, dynamic> modelDecoders = {
       List.from(data).map((json) => Profile.fromJson(json)).toList(),
   //
   Profile: (data) => Profile.fromJson(data),
+
+  List<LoginRequest>: (data) => List.from(data).map((json) => LoginRequest.fromJson(json)).toList(),
+
+  LoginRequest: (data) => LoginRequest.fromJson(data),
 };
 
 /* API Decoders
@@ -44,4 +50,6 @@ final Map<Type, dynamic> controllers = {
   HomeController: () => HomeController(),
 
   // ...
+
+  LoginController: () => LoginController(),
 };

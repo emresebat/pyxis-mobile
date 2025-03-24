@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hyperplace/app/events/logout_event.dart';
+import 'package:plateau/app/events/logout_event.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class SettingsPage extends NyStatefulWidget {

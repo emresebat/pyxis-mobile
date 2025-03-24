@@ -1,8 +1,7 @@
-import 'package:hyperplace/resources/pages/settings_page.dart';
-import 'package:hyperplace/resources/widgets/buttons/buttons.dart';
+import 'package:plateau/resources/pages/settings_page.dart';
+import 'package:plateau/resources/widgets/buttons/buttons.dart';
 
 import '/resources/widgets/theme_toggle_widget.dart';
-import '/app/networking/api_service.dart';
 import '/bootstrap/extensions.dart';
 import '/resources/widgets/logo_widget.dart';
 import '/resources/widgets/safearea_widget.dart';
