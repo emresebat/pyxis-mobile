@@ -17,8 +17,8 @@ class LoginController extends Controller {
     // login
     try {
       var loginResponse = await supabase.auth.signInWithPassword(
-        email: loginRequest.email!,
-        password: loginRequest.password!,
+        email: loginRequest.email,
+        password: loginRequest.password,
       );
       if (loginResponse.session != null) {
         return (success: true, error: '');

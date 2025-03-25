@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:plateau/app/events/login_event.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/bootstrap/extensions.dart';
-import 'package:plateau/resources/pages/choose_login_page.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 import 'package:plateau/resources/widgets/logo_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

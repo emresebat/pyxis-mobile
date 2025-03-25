@@ -1,6 +1,9 @@
+import '/app/controllers/user_controller.dart';
+import '/app/models/place.dart';
+import '/app/controllers/places_controller.dart';
+import '/app/networking/places_api_service.dart';
 import '/app/models/login_request.dart';
 import '/app/controllers/login_controller.dart';
-import '/app/models/profile_section.dart';
 import '/app/controllers/home_controller.dart';
 import '../app/models/profile.dart';
 import '/app/networking/api_service.dart';
@@ -24,6 +27,10 @@ final Map<Type, dynamic> modelDecoders = {
   List<LoginRequest>: (data) => List.from(data).map((json) => LoginRequest.fromJson(json)).toList(),
 
   LoginRequest: (data) => LoginRequest.fromJson(data),
+
+  List<Place>: (data) => List.from(data).map((json) => Place.fromJson(json)).toList(),
+
+  Place: (data) => Place.fromJson(data),
 };
 
 /* API Decoders
@@ -38,6 +45,8 @@ final Map<Type, dynamic> apiDecoders = {
   ApiService: () => ApiService(),
 
   // ...
+
+  PlacesApiService: PlacesApiService(),
 };
 
 /* Controller Decoders
@@ -52,4 +61,8 @@ final Map<Type, dynamic> controllers = {
   // ...
 
   LoginController: () => LoginController(),
+
+  PlacesController: () => PlacesController(),
+
+  UserController: () => UserController(),
 };

@@ -1,66 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:plateau/app/controllers/user_controller.dart';
 import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/profile.dart';
 import 'package:plateau/app/models/profile_section.dart';
-import 'package:plateau/resources/widgets/avatar_widget.dart';
 import 'package:plateau/resources/widgets/profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-class UserTab extends StatefulWidget {
-  const UserTab({super.key});
-
-  @override
-  createState() => _UserTabState();
+class UserTab extends NyStatefulWidget<UserController> {
+  UserTab({super.key}) : super(child: () => _UserTabState());
 }
 
-class _UserTabState extends NyState<UserTab> {
-  final supabase = Supabase.instance.client;
+class _UserTabState extends NyPage<UserTab> {
   Profile? _profile;
-  var _loading = true;
 
   @override
-  get init => () {
-        _getProfile();
+  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
+
+  @override
+  get init => () async {
+        var result = await widget.controller.getProfile();
+        if (result.profile != null) {
+          setState(() {
+            _profile = result.profile;
+          });
+        }
       };
-
-  Future<void> _getProfile() async {
-    setState(() {
-      _loading = true;
-    });
-    try {
-      final userId = supabase.auth.currentSession!.user.id;
-      final data =
-          await supabase.from('profiles').select().eq('id', userId).single();
-      _profile = Profile.fromJson(data);
-    } on PostgrestException catch (error) {
-      if (mounted) showToastOops(description: error.message);
-    } catch (error) {
-      if (mounted) {
-        showToastOops(description: 'Unexpected error occurred');
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _loading = false;
-        });
-      }
-    }
-  }
-
-  Future<void> _signOut() async {
-    try {
-      await supabase.auth.signOut();
-    } on AuthException catch (error) {
-      if (mounted) showToastOops(description: error.message);
-    } catch (error) {
-      if (mounted) {
-        showToastOops(description: 'Unexpected error occurred');
-      }
-    } finally {
-      event<LogoutEvent>();
-    }
-  }
 
   @override
   Widget view(BuildContext context) {
@@ -68,50 +32,57 @@ class _UserTabState extends NyState<UserTab> {
       appBar: AppBar(
         title: Text('${_profile?.username} \'s Profile'),
         actions: [
-          TextButton(onPressed: _signOut, child: const Text('Sign Out')),
+          TextButton(
+              onPressed: () async {
+                var result = await widget.controller.signOut();
+                if (result.success) {
+                  event<LogoutEvent>();
+                } else {
+                  showToastOops(description: result.error);
+                }
+              },
+              child: const Text('Sign Out')),
         ],
       ),
-      body: _loading
-          ? CircularProgressIndicator()
-          : Container(
-              padding: const EdgeInsets.all(20),
-              child: NyListView.separated(
-                child: (BuildContext context, dynamic data) {
-                  var profileSection = (data as ProfileSection);
-                  if (profileSection.title == 'Profile') {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.grey,
-                        child: _profile?.hasAvatar() == false
-                            ? Text(_profile?.initials ?? '')
-                            : null,
-                        backgroundImage: _profile?.hasAvatar() == false
-                            ? null
-                            : NetworkImage(_profile!.avatarUrl!),
-                      ),
-                      title: Text(_profile?.fullName ?? ''),
-                      trailing: Icon(Icons.edit),
-                      onTap: () => pushTo(ProfileTab()),
-                    );
-                  }
-                  return ListTile(
-                      title: Text(profileSection.title),
-                      trailing: Text(profileSection.detail));
-                },
-                data: () async {
-                  return [
-                    ProfileSection('Profile', 'Edit'),
-                    ProfileSection('Places', '0 Places'),
-                    ProfileSection('Wallet', 'None'),
-                    ProfileSection('History', 'Latest Activity'),
-                    ProfileSection('Visibility', 'Private'),
-                  ];
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider();
-                },
-              )),
+      body: Container(
+          padding: const EdgeInsets.all(20),
+          child: NyListView.separated(
+            child: (BuildContext context, dynamic data) {
+              var profileSection = (data as ProfileSection);
+              if (_profile != null && profileSection.title == 'Profile') {
+                return ListTile(
+                  leading: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.grey,
+                    child: _profile?.hasAvatar() == false
+                        ? Text(_profile?.initials ?? '')
+                        : null,
+                    backgroundImage: _profile?.hasAvatar() == false
+                        ? null
+                        : NetworkImage(_profile!.avatarUrl!),
+                  ),
+                  title: Text(_profile?.fullName ?? ''),
+                  trailing: Icon(Icons.edit),
+                  onTap: () => pushTo(ProfileTab()),
+                );
+              }
+              return ListTile(
+                  title: Text(profileSection.title),
+                  trailing: Text(profileSection.detail));
+            },
+            data: () async {
+              return [
+                ProfileSection('Profile', 'Edit'),
+                ProfileSection('Places', '0 Places'),
+                ProfileSection('Wallet', 'None'),
+                ProfileSection('History', 'Latest Activity'),
+                ProfileSection('Visibility', 'Private'),
+              ];
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider();
+            },
+          )),
     );
   }
 }

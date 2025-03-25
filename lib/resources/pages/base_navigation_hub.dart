@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:plateau/resources/widgets/chat_tab_widget.dart';
 import 'package:plateau/resources/widgets/nearme_tab_widget.dart';
 import 'package:plateau/resources/widgets/places_tab_widget.dart';
-import 'package:plateau/resources/widgets/profile_tab_widget.dart';
 import 'package:plateau/resources/widgets/user_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -29,7 +28,7 @@ class _BaseNavigationHubState extends NavigationHub<BaseNavigationHub> {
 
   /// Should the state be maintained
   @override
-  bool get maintainState => true;
+  bool get maintainState => false;
 
   /// Navigation pages
   _BaseNavigationHubState()

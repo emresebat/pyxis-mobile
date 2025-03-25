@@ -22,8 +22,7 @@ class Keys {
   static StorageKey auth = getEnv('SK_USER', defaultValue: 'SK_USER');
 
   static StorageKey bearerToken = 'SK_BEARER_TOKEN';
-
-  // static StorageKey coins = 'SK_COINS';
+  static StorageKey refreshToken = 'SK_REFRESH_TOKEN';
 
   /// Add your storage keys here...
 }

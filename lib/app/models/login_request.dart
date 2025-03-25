@@ -3,14 +3,14 @@ import 'package:nylo_framework/nylo_framework.dart';
 class LoginRequest extends Model {
   static StorageKey key = "login_request";
 
-  String? email, password;
+  final String email, password;
 
-  LoginRequest() : super(key: key);
+  LoginRequest(this.email, this.password) : super(key: key);
 
-  LoginRequest.fromJson(data) : super(key: key) {
-    email = data['email'];
-    password = data['password'];
-  }
+  LoginRequest.fromJson(data)
+      : email = data["email"],
+        password = data["password"],
+        super(key: key);
 
   @override
   toJson() => {"email": email, "password": password};

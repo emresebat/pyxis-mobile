@@ -42,10 +42,7 @@ _setup() async {
   await Future.delayed(const Duration(seconds: 1));
 
   await Supabase.initialize(
-    url: 'https://asdcrzuvjupzajzawihe.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzZGNyenV2anVwemFqemF3aWhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1NTI3MTYsImV4cCI6MjA1ODEyODcxNn0.I3jIzLKlzpMjpQeUf9m59iBAqXG7gQeKuKOEoMY-skY',
-  );
+      url: getEnv('SUPABASE_URL'), anonKey: getEnv('SUPABASE_ANONKEY'));
 
   /// Example: Initializing StorageConfig
   // StorageConfig.init(
