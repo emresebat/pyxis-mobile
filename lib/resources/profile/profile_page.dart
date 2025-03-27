@@ -3,14 +3,14 @@ import 'package:plateau/app/controllers/profile/user_controller.dart';
 import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/profile.dart';
 import 'package:plateau/app/models/profile_section.dart';
-import 'package:plateau/resources/profile/profile_tab_widget.dart';
+import 'package:plateau/resources/profile/edit_profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
-class UserTab extends NyStatefulWidget<UserController> {
-  UserTab({super.key}) : super(child: () => _UserTabState());
+class ProfilePage extends NyStatefulWidget<UserController> {
+  ProfilePage({super.key}) : super(child: () => _ProfilePageState());
 }
 
-class _UserTabState extends NyPage<UserTab> {
+class _ProfilePageState extends NyPage<ProfilePage> {
   Profile? _profile;
 
   @override
@@ -63,7 +63,7 @@ class _UserTabState extends NyPage<UserTab> {
                   ),
                   title: Text(_profile?.fullName ?? ''),
                   trailing: Icon(Icons.edit),
-                  onTap: () => pushTo(ProfileTab()),
+                  onTap: () => pushTo(EditProfileTab()),
                 );
               }
               return ListTile(

@@ -2,7 +2,7 @@ import '../resources/profile/choose_login_page.dart';
 import '../resources/profile/link_login_page.dart';
 import '../resources/profile/signup_page.dart';
 import '/resources/pages/base_navigation_hub.dart';
-import '../resources/profile/login_page.dart';
+import '../resources/profile/email_login_page.dart';
 import '/resources/pages/not_found_page.dart';
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
@@ -50,6 +50,6 @@ appRouter() => nyRoutes((router) {
           .add(ChooseLoginPage.path, pageTransitionSettings: noTransition)
           .initialRoute();
       router.add(SignupPage.path, pageTransitionSettings: noTransition);
-      router.add(LoginPage.path, pageTransitionSettings: noTransition);
+      router.add(EmailLoginPage.path, pageTransitionSettings: noTransition);
       router.add(LinkLoginPage.path, pageTransitionSettings: noTransition);
     });

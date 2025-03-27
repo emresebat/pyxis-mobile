@@ -5,14 +5,14 @@ import 'package:plateau/resources/widgets/avatar_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class ProfileTab extends StatefulWidget {
-  const ProfileTab({super.key});
+class EditProfileTab extends StatefulWidget {
+  const EditProfileTab({super.key});
 
   @override
-  createState() => _ProfileTabState();
+  createState() => _EditProfileTabState();
 }
 
-class _ProfileTabState extends NyState<ProfileTab> {
+class _EditProfileTabState extends NyState<EditProfileTab> {
   final _usernameController = TextEditingController();
   final _fullNameController = TextEditingController();
   String? _avatarUrl;

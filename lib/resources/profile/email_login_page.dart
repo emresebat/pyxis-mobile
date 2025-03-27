@@ -8,13 +8,13 @@ import 'package:plateau/bootstrap/extensions.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 import 'package:plateau/resources/widgets/logo_widget.dart';
 
-class LoginPage extends NyStatefulWidget<LoginController> {
-  static RouteView path = ("/login", (_) => LoginPage());
+class EmailLoginPage extends NyStatefulWidget<LoginController> {
+  static RouteView path = ("/email-login", (_) => EmailLoginPage());
 
-  LoginPage({super.key}) : super(child: () => _LoginPageState());
+  EmailLoginPage({super.key}) : super(child: () => _EmailLoginPageState());
 }
 
-class _LoginPageState extends NyPage<LoginPage> {
+class _EmailLoginPageState extends NyPage<EmailLoginPage> {
   LoginForm form = LoginForm();
 
   @override
