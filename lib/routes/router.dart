@@ -1,8 +1,8 @@
-import '/resources/pages/choose_login_page.dart';
-import '../resources/pages/link_login_page.dart';
-import '/resources/pages/signup_page.dart';
+import '../resources/profile/choose_login_page.dart';
+import '../resources/profile/link_login_page.dart';
+import '../resources/profile/signup_page.dart';
 import '/resources/pages/base_navigation_hub.dart';
-import '/resources/pages/login_page.dart';
+import '../resources/profile/login_page.dart';
 import '/resources/pages/not_found_page.dart';
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';

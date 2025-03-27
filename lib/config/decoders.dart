@@ -1,9 +1,9 @@
-import '/app/controllers/user_controller.dart';
+import '../app/controllers/profile/user_controller.dart';
 import '/app/models/place.dart';
-import '/app/controllers/places_controller.dart';
+import '../app/controllers/places/places_controller.dart';
 import '/app/networking/places_api_service.dart';
 import '/app/models/login_request.dart';
-import '/app/controllers/login_controller.dart';
+import '../app/controllers/profile/login_controller.dart';
 import '/app/controllers/home_controller.dart';
 import '../app/models/profile.dart';
 import '/app/networking/api_service.dart';

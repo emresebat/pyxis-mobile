@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plateau/app/controllers/user_controller.dart';
+import 'package:plateau/app/controllers/profile/user_controller.dart';
 import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/profile.dart';
 import 'package:plateau/app/models/profile_section.dart';
-import 'package:plateau/resources/widgets/profile_tab_widget.dart';
+import 'package:plateau/resources/profile/profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class UserTab extends NyStatefulWidget<UserController> {

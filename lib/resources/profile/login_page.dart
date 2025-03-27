@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plateau/app/controllers/login_controller.dart';
+import 'package:plateau/app/controllers/profile/login_controller.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/events/login_event.dart';
 import 'package:plateau/app/forms/login_form.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:plateau/app/controllers/places_controller.dart';
+import 'package:plateau/app/controllers/places/places_controller.dart';
 import 'package:plateau/app/models/place.dart';
 
 class PlacesTab extends NyStatefulWidget<PlacesController> {

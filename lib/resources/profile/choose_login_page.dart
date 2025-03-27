@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:plateau/resources/pages/link_login_page.dart';
-import 'package:plateau/resources/pages/login_page.dart';
+import 'package:plateau/resources/profile/link_login_page.dart';
+import 'package:plateau/resources/profile/login_page.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 import 'package:plateau/resources/widgets/logo_widget.dart';
 import '/bootstrap/extensions.dart';
