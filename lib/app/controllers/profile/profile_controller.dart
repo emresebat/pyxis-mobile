@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '/app/controllers/controller.dart';
 import 'package:flutter/widgets.dart';
 
-class UserController extends Controller {
+class ProfileController extends Controller {
   final SupabaseClient supabase = Supabase.instance.client;
 
   @override

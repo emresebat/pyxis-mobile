@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '/resources/widgets/splash_screen.dart';
 import '/bootstrap/app.dart';
@@ -43,6 +44,33 @@ _setup() async {
 
   await Supabase.initialize(
       url: getEnv('SUPABASE_URL'), anonKey: getEnv('SUPABASE_ANONKEY'));
+
+  bool serviceEnabled;
+  LocationPermission permission;
+
+  // Check if location services are enabled
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    // Handle location services not enabled
+    return;
+  }
+
+  // Check for location permissions
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      // Handle permission denied
+      return;
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    // Handle permission permanently denied
+    return;
+  }
+
+  Main.positionServiceReady = true;
 
   /// Example: Initializing StorageConfig
   // StorageConfig.init(

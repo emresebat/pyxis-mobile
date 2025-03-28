@@ -10,6 +10,8 @@ class Main extends StatelessWidget {
   final Route<dynamic>? Function(RouteSettings settings) onGenerateRoute;
   final Route<dynamic>? Function(RouteSettings settings) onUnknownRoute;
 
+  static bool positionServiceReady = false;
+
   Main(
     Nylo nylo, {
     super.key,

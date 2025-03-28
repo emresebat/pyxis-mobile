@@ -1,3 +1,6 @@
+import 'package:plateau/resources/places/places_page.dart';
+
+import '../resources/places/add_place_page.dart';
 import '../resources/profile/choose_login_page.dart';
 import '../resources/profile/link_login_page.dart';
 import '../resources/profile/signup_page.dart';
@@ -46,10 +49,15 @@ appRouter() => nyRoutes((router) {
       router
           .add(BaseNavigationHub.path, pageTransitionSettings: noTransition)
           .authenticatedRoute();
+      // profiles
       router
           .add(ChooseLoginPage.path, pageTransitionSettings: noTransition)
           .initialRoute();
       router.add(SignupPage.path, pageTransitionSettings: noTransition);
       router.add(EmailLoginPage.path, pageTransitionSettings: noTransition);
       router.add(LinkLoginPage.path, pageTransitionSettings: noTransition);
+      // places
+      router.add(PlacesPage.path, pageTransitionSettings: noTransition);
+      router.add(AddPlacePage.path, transition: PageTransitionType.bottomToTop);
+      // nearme
     });

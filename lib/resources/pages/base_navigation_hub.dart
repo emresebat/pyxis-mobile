@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/resources/chat/chat_tab_widget.dart';
 import 'package:plateau/resources/nearme/nearme_tab_widget.dart';
-import 'package:plateau/resources/places/places_tab_widget.dart';
+import 'package:plateau/resources/pages/home_page.dart';
+import 'package:plateau/resources/places/places_page.dart';
 import 'package:plateau/resources/profile/profile_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -44,7 +45,7 @@ class _BaseNavigationHubState extends NavigationHub<BaseNavigationHub> {
             1: NavigationTab(
               title: "Places",
               page:
-                  PlacesTab(), // create using: 'dart run nylo_framework:main make:stateful_widget settings_tab'
+                  PlacesPage(), // create using: 'dart run nylo_framework:main make:stateful_widget settings_tab'
               icon: Icon(Icons.pin_drop_outlined),
               activeIcon: Icon(Icons.pin_drop),
             ),

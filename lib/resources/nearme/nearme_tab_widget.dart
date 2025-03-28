@@ -2,6 +2,7 @@ import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/bootstrap/app.dart';
 
 class NearmeTab extends StatefulWidget {
   const NearmeTab({super.key});
@@ -29,30 +30,9 @@ class _NearmeTabState extends NyState<NearmeTab> {
       };
 
   Future<void> _fetchUserLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
     // Check if location services are enabled
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
+    if (!Main.positionServiceReady) {
       // Handle location services not enabled
-      setState(() => _isLoading = false);
-      return;
-    }
-
-    // Check for location permissions
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Handle permission denied
-        setState(() => _isLoading = false);
-        return;
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Handle permission permanently denied
       setState(() => _isLoading = false);
       return;
     }

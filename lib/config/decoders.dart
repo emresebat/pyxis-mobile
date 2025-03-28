@@ -1,4 +1,5 @@
-import '../app/controllers/profile/user_controller.dart';
+import '../app/controllers/places/add_place_controller.dart';
+import '../app/controllers/profile/profile_controller.dart';
 import '/app/models/place.dart';
 import '../app/controllers/places/places_controller.dart';
 import '/app/networking/places_api_service.dart';
@@ -64,5 +65,7 @@ final Map<Type, dynamic> controllers = {
 
   PlacesController: () => PlacesController(),
 
-  UserController: () => UserController(),
+  ProfileController: () => ProfileController(),
+
+  AddPlaceController: () => AddPlaceController(),
 };
