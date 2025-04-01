@@ -3,6 +3,7 @@ import 'package:plateau/app/controllers/profile/profile_controller.dart';
 import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/profile.dart';
 import 'package:plateau/app/models/profile_section.dart';
+import 'package:plateau/app/models/profile_summary.dart';
 import 'package:plateau/bootstrap/extensions.dart';
 import 'package:plateau/resources/profile/edit_profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
@@ -14,6 +15,7 @@ class ProfilePage extends NyStatefulWidget<ProfileController> {
 }
 
 class _ProfilePageState extends NyPage<ProfilePage> {
+  ProfileSummary? _profileSummary;
   Profile? _profile;
 
   @override
@@ -21,9 +23,10 @@ class _ProfilePageState extends NyPage<ProfilePage> {
 
   @override
   get init => () async {
-        var result = await widget.controller.getProfile();
-        if (result.profile != null) {
+        var result = await widget.controller.getProfileSummary();
+        if (result != null) {
           setState(() {
+            _profileSummary = result;
             _profile = result.profile;
           });
         }
@@ -57,7 +60,7 @@ class _ProfilePageState extends NyPage<ProfilePage> {
                 radius: 20,
                 backgroundColor: Colors.grey,
                 child: _profile?.hasAvatar() == false
-                    ? Text(_profile?.initials ?? '')
+                    ? Text(_profile?.getInitials() ?? '')
                     : null,
                 backgroundImage: _profile?.hasAvatar() == false
                     ? null
@@ -77,7 +80,7 @@ class _ProfilePageState extends NyPage<ProfilePage> {
         data: () async {
           return [
             ProfileSection('Profile', 'Edit'),
-            ProfileSection('Places', '0 Places'),
+            ProfileSection('Places', '${_profileSummary?.placesCount} Places'),
             ProfileSection('Wallet', 'None'),
             ProfileSection('History', 'Latest Activity'),
             ProfileSection('Visibility', 'Private'),

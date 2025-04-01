@@ -142,7 +142,7 @@ class _EditProfileTabState extends NyState<EditProfileTab> {
               Avatar(
                 imageUrl: _avatarUrl,
                 onUpload: _onUpload,
-                initials: _profile?.initials,
+                initials: _profile?.getInitials() ?? '',
               ),
               const SizedBox(height: 18),
               TextFormField(

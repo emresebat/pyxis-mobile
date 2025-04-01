@@ -1,3 +1,9 @@
+import 'package:plateau/app/networking/profile_api_service.dart';
+
+import '/app/models/profile_summary.dart';
+import '../app/models/create_place_request.dart';
+import 'package:plateau/app/controllers/places/add_place2_controller.dart';
+
 import '../app/controllers/places/add_place_controller.dart';
 import '../app/controllers/profile/profile_controller.dart';
 import '/app/models/place.dart';
@@ -25,13 +31,25 @@ final Map<Type, dynamic> modelDecoders = {
   //
   Profile: (data) => Profile.fromJson(data),
 
-  List<LoginRequest>: (data) => List.from(data).map((json) => LoginRequest.fromJson(json)).toList(),
+  List<LoginRequest>: (data) =>
+      List.from(data).map((json) => LoginRequest.fromJson(json)).toList(),
 
   LoginRequest: (data) => LoginRequest.fromJson(data),
 
-  List<Place>: (data) => List.from(data).map((json) => Place.fromJson(json)).toList(),
+  List<Place>: (data) =>
+      List.from(data).map((json) => Place.fromJson(json)).toList(),
 
   Place: (data) => Place.fromJson(data),
+
+  List<CreatePlaceRequest>: (data) =>
+      List.from(data).map((json) => CreatePlaceRequest.fromJson(json)).toList(),
+
+  CreatePlaceRequest: (data) => CreatePlaceRequest.fromJson(data),
+
+  List<ProfileSummary>: (data) =>
+      List.from(data).map((json) => ProfileSummary.fromJson(json)).toList(),
+
+  ProfileSummary: (data) => ProfileSummary.fromJson(data),
 };
 
 /* API Decoders
@@ -48,6 +66,7 @@ final Map<Type, dynamic> apiDecoders = {
   // ...
 
   PlacesApiService: PlacesApiService(),
+  ProfileApiService: ProfileApiService(),
 };
 
 /* Controller Decoders
@@ -62,10 +81,8 @@ final Map<Type, dynamic> controllers = {
   // ...
 
   LoginController: () => LoginController(),
-
   PlacesController: () => PlacesController(),
-
   ProfileController: () => ProfileController(),
-
   AddPlaceController: () => AddPlaceController(),
+  AddPlace2Controller: () => AddPlace2Controller(),
 };

@@ -3,6 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/places_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/bootstrap/helpers.dart';
+import 'package:plateau/resources/places/add_place2_page.dart';
 import 'package:plateau/resources/places/add_place_page.dart';
 
 class PlacesPage extends NyStatefulWidget<PlacesController> {
@@ -32,7 +33,7 @@ class _PlacesPageState extends NyPage<PlacesPage> {
               icon: Icon(Icons.add),
               tooltip: 'Add',
               onPressed: () {
-                routeTo(AddPlacePage.path);
+                routeTo(AddPlace2Page.path);
               })
         ],
       ),

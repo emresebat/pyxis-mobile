@@ -1,32 +1,29 @@
 import 'package:nylo_framework/nylo_framework.dart';
 
-class Place extends Model {
-  static StorageKey key = "place";
+class CreatePlaceRequest extends Model {
+  static StorageKey key = "add_place_request";
 
   final String slug, name, description, thumbnailUrl;
-  final bool isVirtual;
   final double lat, lng;
 
-  Place(this.slug, this.name, this.description, this.isVirtual,
-      this.thumbnailUrl, this.lat, this.lng)
+  CreatePlaceRequest(this.slug, this.name, this.description, this.thumbnailUrl,
+      this.lat, this.lng)
       : super(key: key);
 
-  Place.fromJson(data)
+  CreatePlaceRequest.fromJson(data)
       : slug = data['slug'],
         name = data['name'],
         description = data['description'],
-        isVirtual = data['is_virtual'] as bool,
         thumbnailUrl = data['thumbnail_url'] ?? '',
         lat = data['lat'] ?? 0.0,
         lng = data['lng'] ?? 0.0,
-        super(key: key);
+        super(key: key) {}
 
   @override
   toJson() => {
         'slug': slug,
         'name': name,
         'description': description,
-        'is_virtual': isVirtual,
         'thumbnail_url': thumbnailUrl,
         'lat': lat,
         'lng': lng,

@@ -1,22 +1,21 @@
 import 'package:nylo_framework/nylo_framework.dart';
 
 class Profile extends Model {
-  String? username, email, fullName, avatarUrl;
-  String initials = 'U';
-
   static StorageKey key = 'profile';
 
-  Profile() : super(key: key);
+  final String? username, email, fullName, avatarUrl;
 
-  Profile.fromJson(dynamic data) {
-    username = data['username'];
-    email = data['email'];
-    fullName = data['full_name'];
-    avatarUrl = data['avatar_url'];
-    initials = _getInitials();
-  }
+  Profile(this.username, this.email, this.fullName, this.avatarUrl)
+      : super(key: key);
 
-  _getInitials() {
+  Profile.fromJson(dynamic data)
+      : username = data['username'],
+        email = data['email'],
+        fullName = data['full_name'],
+        avatarUrl = data['avatar_url'],
+        super(key: key);
+
+  getInitials() {
     if (fullName != null) {
       final names = fullName!.split(' ');
       if (names.length > 1) {

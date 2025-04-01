@@ -1,3 +1,4 @@
+import 'package:plateau/resources/places/add_place2_page.dart';
 import 'package:plateau/resources/places/places_page.dart';
 
 import '../resources/places/add_place_page.dart';
@@ -59,5 +60,7 @@ appRouter() => nyRoutes((router) {
       // places
       router.add(PlacesPage.path, pageTransitionSettings: noTransition);
       router.add(AddPlacePage.path, transition: PageTransitionType.bottomToTop);
+      router.add(AddPlace2Page.path,
+          transition: PageTransitionType.bottomToTop);
       // nearme
     });

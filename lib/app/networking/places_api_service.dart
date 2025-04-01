@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plateau/app/models/create_place_request.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/networking/dio/interceptors/supabase_auth_interceptor.dart';
 import '/config/decoders.dart';
@@ -20,6 +21,18 @@ class PlacesApiService extends NyApiService {
   Future<List<Place>?> list() async {
     return await network<List<Place>>(
       request: (request) => request.get("/places"),
+    );
+  }
+
+  Future<Place?> create(CreatePlaceRequest data) async {
+    return await network<Place>(
+      request: (request) => request.post("/places", data: data.toJson()),
+    );
+  }
+
+  Future<List<Place>?> getMyPlaces() async {
+    return await network<List<Place>>(
+      request: (request) => request.get("/places/my"),
     );
   }
 }

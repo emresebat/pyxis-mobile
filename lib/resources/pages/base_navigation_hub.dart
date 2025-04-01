@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/resources/chat/chat_tab_widget.dart';
 import 'package:plateau/resources/nearme/nearme_tab_widget.dart';
-import 'package:plateau/resources/pages/home_page.dart';
 import 'package:plateau/resources/places/places_page.dart';
 import 'package:plateau/resources/profile/profile_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
