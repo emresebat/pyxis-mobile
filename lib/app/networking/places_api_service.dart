@@ -35,4 +35,10 @@ class PlacesApiService extends NyApiService {
       request: (request) => request.get("/places/my"),
     );
   }
+
+  Future<Place?> getById(String id) async {
+    return await network<Place>(
+      request: (request) => request.get("/places/${id}"),
+    );
+  }
 }

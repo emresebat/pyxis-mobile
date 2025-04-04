@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/app/controllers/profile/profile_controller.dart';
 import 'package:plateau/app/events/logout_event.dart';
+import 'package:plateau/app/models/list_item.dart';
 import 'package:plateau/app/models/profile.dart';
-import 'package:plateau/app/models/profile_section.dart';
 import 'package:plateau/app/models/profile_summary.dart';
-import 'package:plateau/bootstrap/extensions.dart';
 import 'package:plateau/resources/profile/edit_profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/resources/widgets/avatar_widget.dart';
 import 'package:plateau/resources/widgets/safearea_widget.dart';
-import 'package:plateau/resources/widgets/theme_toggle_widget.dart';
 
 class ProfilePage extends NyStatefulWidget<ProfileController> {
   ProfilePage({super.key}) : super(child: () => _ProfilePageState());
@@ -51,40 +50,35 @@ class _ProfilePageState extends NyPage<ProfilePage> {
         ],
       ),
       body: SafeAreaWidget(
-          child: NyListView.separated(
+          child: NyPullToRefresh.separated(
         child: (BuildContext context, dynamic data) {
-          var profileSection = (data as ProfileSection);
-          if (_profile != null && profileSection.title == 'Profile') {
-            return ListTile(
-              leading: CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.grey,
-                child: _profile?.hasAvatar() == false
-                    ? Text(_profile?.getInitials() ?? '')
-                    : null,
-                backgroundImage: _profile?.hasAvatar() == false
-                    ? null
-                    : NetworkImage(_profile!.avatarUrl!),
-              ),
-              title: Text(_profile?.fullName ?? '').titleLarge(),
-              trailing: Icon(Icons.edit),
-              onTap: () => pushTo(EditProfileTab()),
-            );
-          } else if (profileSection.title == 'Theme') {
-            return ThemeToggle();
+          var listItem = (data as ListItem);
+          if (listItem.widget != null) {
+            return listItem.widget!;
           }
           return ListTile(
-              title: Text(profileSection.title).titleMedium(),
-              trailing: Text(profileSection.detail).titleMedium());
+              title: Text(listItem.title).titleMedium(),
+              trailing: Text(listItem.detail ?? '').titleMedium());
         },
-        data: () async {
+        data: (int iteration) {
           return [
-            ProfileSection('Profile', 'Edit'),
-            ProfileSection('Places', '${_profileSummary?.placesCount} Places'),
-            ProfileSection('Wallet', 'None'),
-            ProfileSection('History', 'Latest Activity'),
-            ProfileSection('Visibility', 'Private'),
-            ProfileSection('Theme', '')
+            ListItem('Profile',
+                detail: 'Edit',
+                widget: ListTile(
+                  leading: Avatar(
+                    radius: 20,
+                    imageUrl: _profile?.avatarUrl,
+                    initials: _profile?.getInitials(),
+                  ),
+                  title: Text(_profile?.fullName ?? '').titleLarge(),
+                  trailing: Icon(Icons.edit),
+                  onTap: () => pushTo(EditProfileTab()),
+                )),
+            ListItem('Places',
+                detail: '${_profileSummary?.placesCount} Places'),
+            ListItem('Wallet', detail: '${_profileSummary?.wallet}'),
+            ListItem('History', detail: 'Latest Activity'),
+            ListItem('Visibility', detail: '${_profileSummary?.visibility}')
           ];
         },
         separatorBuilder: (BuildContext context, int index) {

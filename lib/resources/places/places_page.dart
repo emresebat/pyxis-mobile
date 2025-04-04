@@ -3,11 +3,10 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/places_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/bootstrap/helpers.dart';
-import 'package:plateau/resources/places/add_place2_page.dart';
-import 'package:plateau/resources/places/add_place_page.dart';
+import 'package:plateau/resources/places/new_place_page.dart';
 
 class PlacesPage extends NyStatefulWidget<PlacesController> {
-  static RouteView path = ("/places", (_) => AddPlacePage());
+  static RouteView path = ("/places", (_) => PlacesPage());
 
   PlacesPage({super.key}) : super(child: () => _PlacesPageState());
 }
@@ -33,12 +32,12 @@ class _PlacesPageState extends NyPage<PlacesPage> {
               icon: Icon(Icons.add),
               tooltip: 'Add',
               onPressed: () {
-                routeTo(AddPlace2Page.path);
+                routeTo(NewPlacePage.path);
               })
         ],
       ),
       body: Center(
-        child: NyListView.separated(
+        child: NyPullToRefresh.separated(
           child: (context, item) => ListTile(
             leading: SizedBox(
                 height: 50,
@@ -52,7 +51,7 @@ class _PlacesPageState extends NyPage<PlacesPage> {
             subtitle: Text(item.description),
           ),
           separatorBuilder: (context, index) => Divider(),
-          data: () => _places,
+          data: (int iteration) => _places,
         ),
       ),
     );

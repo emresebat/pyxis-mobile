@@ -3,7 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 class CreatePlaceRequest extends Model {
   static StorageKey key = "add_place_request";
 
-  final String slug, name, description, thumbnailUrl;
+  final String? slug, name, description, thumbnailUrl;
   final double lat, lng;
 
   CreatePlaceRequest(this.slug, this.name, this.description, this.thumbnailUrl,

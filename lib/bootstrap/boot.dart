@@ -40,7 +40,8 @@ class Boot {
 |-------------------------------------------------------------------------- */
 
 _setup() async {
-  await Future.delayed(const Duration(seconds: 1));
+  // 3 seconds splash screen
+  await Future.delayed(const Duration(seconds: 3));
 
   await Supabase.initialize(
       url: getEnv('SUPABASE_URL'), anonKey: getEnv('SUPABASE_ANONKEY'));

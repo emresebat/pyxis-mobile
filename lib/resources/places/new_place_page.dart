@@ -1,16 +1,17 @@
 import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:plateau/app/controllers/places/add_place2_controller.dart';
+import 'package:plateau/app/controllers/places/new_place_controller.dart';
+import 'package:plateau/resources/places/view_new_place_page.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 
-class AddPlace2Page extends NyStatefulWidget<AddPlace2Controller> {
-  static RouteView path = ("/add-place2", (_) => AddPlace2Page());
+class NewPlacePage extends NyStatefulWidget<NewPlaceController> {
+  static RouteView path = ("/new-place", (_) => NewPlacePage());
 
-  AddPlace2Page({super.key}) : super(child: () => _AddPlacePage2State());
+  NewPlacePage({super.key}) : super(child: () => _NewPlacePageState());
 }
 
-class _AddPlacePage2State extends NyPage<AddPlace2Page> {
+class _NewPlacePageState extends NyPage<NewPlacePage> {
   @override
   get init => () async {
         await widget.controller.getPosition();
@@ -19,7 +20,7 @@ class _AddPlacePage2State extends NyPage<AddPlace2Page> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text("Add Place")),
+      appBar: AppBar(title: Text("New Place")),
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: widget.controller.positionReady
@@ -31,10 +32,6 @@ class _AddPlacePage2State extends NyPage<AddPlace2Page> {
                         padding: const EdgeInsets.all(25),
                         child: Column(
                           children: [
-                            Text("New Place").titleLarge(),
-                            const SizedBox(height: 18),
-                            Text(widget.controller.randomName).titleLarge(),
-                            const SizedBox(height: 18),
                             SizedBox(
                                 height: 250,
                                 child: AppleMap(
@@ -54,7 +51,10 @@ class _AddPlacePage2State extends NyPage<AddPlace2Page> {
                                   var place =
                                       await widget.controller.createPlace();
                                   if (place != null) {
-                                    routeTo("/places/${place.slug}");
+                                    routeTo(ViewNewPlacePage.path,
+                                        navigationType:
+                                            NavigationType.pushReplace,
+                                        data: place.id);
                                   } else {
                                     showToastOops(
                                         description: "Failed to create place");

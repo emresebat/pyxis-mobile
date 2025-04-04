@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   static MaterialApp app() {
     return MaterialApp(
       home: SplashScreen(),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
     );
   }
 

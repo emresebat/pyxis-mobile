@@ -1,19 +1,18 @@
+import 'package:plateau/app/controllers/home_controller.dart';
+import 'package:plateau/app/controllers/places/places_controller.dart';
+import 'package:plateau/app/controllers/places/view_new_place_controller.dart';
+import 'package:plateau/app/controllers/profile/login_controller.dart';
+import 'package:plateau/app/controllers/profile/profile_controller.dart';
+import 'package:plateau/app/models/create_place_request.dart';
+import 'package:plateau/app/models/login_request.dart';
+import 'package:plateau/app/models/place.dart';
+import 'package:plateau/app/models/profile.dart';
+import 'package:plateau/app/models/profile_summary.dart';
+import 'package:plateau/app/networking/api_service.dart';
+import 'package:plateau/app/networking/places_api_service.dart';
 import 'package:plateau/app/networking/profile_api_service.dart';
 
-import '/app/models/profile_summary.dart';
-import '../app/models/create_place_request.dart';
-import 'package:plateau/app/controllers/places/add_place2_controller.dart';
-
-import '../app/controllers/places/add_place_controller.dart';
-import '../app/controllers/profile/profile_controller.dart';
-import '/app/models/place.dart';
-import '../app/controllers/places/places_controller.dart';
-import '/app/networking/places_api_service.dart';
-import '/app/models/login_request.dart';
-import '../app/controllers/profile/login_controller.dart';
-import '/app/controllers/home_controller.dart';
-import '../app/models/profile.dart';
-import '/app/networking/api_service.dart';
+import 'package:plateau/app/controllers/places/new_place_controller.dart';
 
 /* Model Decoders
 |--------------------------------------------------------------------------
@@ -83,6 +82,6 @@ final Map<Type, dynamic> controllers = {
   LoginController: () => LoginController(),
   PlacesController: () => PlacesController(),
   ProfileController: () => ProfileController(),
-  AddPlaceController: () => AddPlaceController(),
-  AddPlace2Controller: () => AddPlace2Controller(),
+  NewPlaceController: () => NewPlaceController(),
+  ViewNewPlaceController: () => ViewNewPlaceController(),
 };

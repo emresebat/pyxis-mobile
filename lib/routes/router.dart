@@ -1,7 +1,7 @@
-import 'package:plateau/resources/places/add_place2_page.dart';
+import 'package:plateau/resources/places/new_place_page.dart';
+import 'package:plateau/resources/places/view_new_place_page.dart';
 import 'package:plateau/resources/places/places_page.dart';
 
-import '../resources/places/add_place_page.dart';
 import '../resources/profile/choose_login_page.dart';
 import '../resources/profile/link_login_page.dart';
 import '../resources/profile/signup_page.dart';
@@ -59,8 +59,8 @@ appRouter() => nyRoutes((router) {
       router.add(LinkLoginPage.path, pageTransitionSettings: noTransition);
       // places
       router.add(PlacesPage.path, pageTransitionSettings: noTransition);
-      router.add(AddPlacePage.path, transition: PageTransitionType.bottomToTop);
-      router.add(AddPlace2Page.path,
+      router.add(NewPlacePage.path, transition: PageTransitionType.bottomToTop);
+      router.add(ViewNewPlacePage.path,
           transition: PageTransitionType.bottomToTop);
       // nearme
     });

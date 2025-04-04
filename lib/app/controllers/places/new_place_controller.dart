@@ -4,18 +4,16 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/models/create_place_request.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/networking/places_api_service.dart';
-import 'package:word_generator/word_generator.dart';
 
 import '/app/controllers/controller.dart';
 import 'package:flutter/widgets.dart';
 
-class AddPlace2Controller extends Controller {
+class NewPlaceController extends Controller {
   late Position currentPosition;
   late LatLng currentCoords;
   late Annotation currentLocationAnnotation;
   bool positionReady = false;
   late AppleMapController mapController;
-  late String randomName;
 
   @override
   construct(BuildContext context) {
@@ -30,18 +28,16 @@ class AddPlace2Controller extends Controller {
       position: currentCoords,
       infoWindow: const InfoWindow(title: 'You are here'),
     );
-    final WordGenerator wordGenerator = WordGenerator();
-    randomName = wordGenerator.randomSentence(3).trim().replaceAll(" ", "-");
     positionReady = true;
   }
 
   Future<Place?> createPlace() async {
     return await api<PlacesApiService>((request) => request.create(
           CreatePlaceRequest(
-            randomName,
-            randomName,
-            randomName,
-            "",
+            null,
+            null,
+            null,
+            null,
             currentPosition.latitude,
             currentPosition.longitude,
           ),

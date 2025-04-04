@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/profile.dart';
-import 'package:plateau/resources/widgets/avatar_widget.dart';
+import 'package:plateau/resources/widgets/editable_avatar_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -139,7 +139,7 @@ class _EditProfileTabState extends NyState<EditProfileTab> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Avatar(
+              EditableAvatar(
                 imageUrl: _avatarUrl,
                 onUpload: _onUpload,
                 initials: _profile?.getInitials() ?? '',
