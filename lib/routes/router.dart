@@ -9,6 +9,7 @@ import 'package:plateau/resources/places/profile_wallet_page.dart';
 import 'package:plateau/resources/places/new_place_page.dart';
 import 'package:plateau/resources/places/view_new_place_page.dart';
 import 'package:plateau/resources/places/places_page.dart';
+import 'package:plateau/resources/places/view_own_place_page.dart';
 import 'package:plateau/resources/profile/choose_login_page.dart';
 import 'package:plateau/resources/profile/email_login_page.dart';
 import 'package:plateau/resources/profile/link_login_page.dart';
@@ -64,8 +65,10 @@ appRouter() => nyRoutes((router) {
       router.add(ProfileWalletPage.path, pageTransitionSettings: noTransition);
       router.add(ProfileHistoryPage.path, pageTransitionSettings: noTransition);
       router.add(ProfilePlacesPage.path, pageTransitionSettings: noTransition);
+
       // places
       router.add(PlacesPage.path, pageTransitionSettings: noTransition);
+      router.add(ViewOwnPlacePage.path, pageTransitionSettings: noTransition);
       router.add(NewPlacePage.path, transition: PageTransitionType.bottomToTop);
       router.add(ViewNewPlacePage.path,
           transition: PageTransitionType.bottomToTop);

@@ -3,6 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/profile_places_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/bootstrap/helpers.dart';
+import 'package:plateau/resources/places/view_own_place_page.dart';
 
 class ProfilePlacesPage extends NyStatefulWidget<ProfilePlacesController> {
   static RouteView path = ("/profile-places", (_) => ProfilePlacesPage());
@@ -46,6 +47,9 @@ class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
                         text: item.name)))),
             title: Text(item.name),
             subtitle: Text(item.description),
+            onTap: () {
+              routeTo(ViewOwnPlacePage.path, data: item.id.toString());
+            },
           ),
           separatorBuilder: (context, index) => Divider(),
           data: (int iteration) => _places,
