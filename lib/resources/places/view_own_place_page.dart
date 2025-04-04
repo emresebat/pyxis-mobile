@@ -5,6 +5,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/view_own_place_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/models/list_item.dart';
+import 'package:plateau/resources/places/own_place_visits_page.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 
 class ViewOwnPlacePage extends NyStatefulWidget<ViewOwnPlaceController> {
@@ -69,8 +70,11 @@ class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
                     ListItem('Visits',
                         widget: ListTile(
                           leading: Icon(Icons.people),
-                          title: Text('0 Visits').titleMedium(),
+                          title: Text('3 Visits').titleMedium(),
                           trailing: Text('View History').titleMedium(),
+                          onTap: () {
+                            routeTo(OwnPlaceVisitsPage.path);
+                          },
                         )),
                     ListItem('Edit',
                         widget: Button.primary(

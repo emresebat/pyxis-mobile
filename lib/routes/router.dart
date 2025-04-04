@@ -1,3 +1,4 @@
+import '../resources/places/own_place_visits_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 import 'package:plateau/resources/pages/base_navigation_hub.dart';
@@ -73,4 +74,5 @@ appRouter() => nyRoutes((router) {
       router.add(ViewNewPlacePage.path,
           transition: PageTransitionType.bottomToTop);
       // nearme
-    });
+      router.add(OwnPlaceVisitsPage.path);
+});

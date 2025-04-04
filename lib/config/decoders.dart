@@ -1,3 +1,4 @@
+import '../app/controllers/places/own_place_visits_controller.dart';
 import 'package:plateau/app/controllers/home_controller.dart';
 import 'package:plateau/app/controllers/places/places_controller.dart';
 import 'package:plateau/app/controllers/places/profile_places_controller.dart';
@@ -88,4 +89,6 @@ final Map<Type, dynamic> controllers = {
   NewPlaceController: () => NewPlaceController(),
   ViewNewPlaceController: () => ViewNewPlaceController(),
   ViewOwnPlaceController: () => ViewOwnPlaceController(),
+
+  OwnPlaceVisitsController: () => OwnPlaceVisitsController(),
 };
