@@ -62,17 +62,17 @@ class _ProfilePageState extends NyPage<ProfilePage> {
           child: NyPullToRefresh.separated(
         child: (BuildContext context, dynamic data) {
           var listItem = (data as ListItem);
-          if (listItem.widget != null) {
-            return listItem.widget!;
+          if (listItem.displayWidget != null) {
+            return listItem.displayWidget!;
           }
           return ListTile(
             title: Text(listItem.title).titleMedium(),
             trailing: Text(listItem.detail ?? '').titleMedium(),
             onTap: () {
-              if (listItem.targetRoute == null) {
+              if (listItem.pushToWidget == null) {
                 return;
               }
-              routeTo(listItem.targetRoute);
+              pushTo(listItem.pushToWidget!);
             },
           );
         },
@@ -80,7 +80,7 @@ class _ProfilePageState extends NyPage<ProfilePage> {
           return [
             ListItem('Profile',
                 detail: 'Edit',
-                widget: ListTile(
+                displayWidget: ListTile(
                   leading: Avatar(
                     radius: 20,
                     imageUrl: _profile?.avatarUrl,
@@ -92,16 +92,15 @@ class _ProfilePageState extends NyPage<ProfilePage> {
                 )),
             ListItem('Places',
                 detail: '${_profileSummary?.placesCount} Places',
-                targetRoute: ProfilePlacesPage.path),
+                pushToWidget: ProfilePlacesPage()),
             ListItem('Wallet',
                 detail: '${_profileSummary?.wallet}',
-                targetRoute: ProfileWalletPage.path),
+                pushToWidget: ProfileWalletPage()),
             ListItem('History',
-                detail: 'Latest Activity',
-                targetRoute: ProfileHistoryPage.path),
+                detail: 'Latest Activity', pushToWidget: ProfileHistoryPage()),
             ListItem('Visibility',
                 detail: '${_profileSummary?.visibility}',
-                targetRoute: ProfileVisibilityPage.path)
+                pushToWidget: ProfileVisibilityPage())
           ];
         },
         separatorBuilder: (BuildContext context, int index) {

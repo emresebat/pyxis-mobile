@@ -46,16 +46,16 @@ class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
             ? NyListView.separated(
                 child: (BuildContext context, dynamic data) {
                   var listItem = (data as ListItem);
-                  return listItem.widget!;
+                  return listItem.displayWidget!;
                 },
                 data: () {
                   return [
                     ListItem(
                       'Title',
-                      widget: Text(_place!.description).titleLarge(),
+                      displayWidget: Text(_place!.description).titleLarge(),
                     ),
                     ListItem('Map',
-                        widget: SizedBox(
+                        displayWidget: SizedBox(
                             height: 250,
                             child: AppleMap(
                               onMapCreated: widget.controller.onMapCreated,
@@ -68,7 +68,7 @@ class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
                               ]),
                             ))),
                     ListItem('Visits',
-                        widget: ListTile(
+                        displayWidget: ListTile(
                           leading: Icon(Icons.people),
                           title: Text('3 Visits').titleMedium(),
                           trailing: Text('View History').titleMedium(),
@@ -77,7 +77,7 @@ class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
                           },
                         )),
                     ListItem('Edit',
-                        widget: Button.primary(
+                        displayWidget: Button.primary(
                             text: "Edit Place", onPressed: () async {})),
                   ];
                 },

@@ -6,10 +6,19 @@ class ListItem {
   final String? detail;
 
   /// Widget to be displayed in the list item.
-  final Widget? widget;
+  final Widget? displayWidget;
 
   /// Route to navigate to when the list item is tapped.
   final RouteView? targetRoute;
 
-  ListItem(this.title, {this.detail, this.targetRoute, this.widget});
+  /// Widget to be displayed when the list item is tapped.
+  final Widget? pushToWidget;
+
+  ListItem(
+    this.title, {
+    this.detail,
+    this.targetRoute,
+    this.displayWidget,
+    this.pushToWidget,
+  });
 }

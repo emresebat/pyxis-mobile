@@ -25,8 +25,19 @@ class _ProfileWalletPageState extends NyPage<ProfileWalletPage> {
         ],
       ),
       body: SafeArea(
-        child: Container(),
-      ),
+          child: NyListView.separated(
+        child: (context, item) => ListTile(
+          leading: Text(item["title"]).titleLarge(),
+          title: Text(''),
+          trailing: Text(item["detail"]).titleMedium(),
+        ),
+        data: () => [
+          {"title": "Metamask", "detail": "Edit"},
+        ],
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider();
+        },
+      )),
     );
   }
 }

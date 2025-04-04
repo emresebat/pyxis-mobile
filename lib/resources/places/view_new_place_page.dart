@@ -41,16 +41,16 @@ class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
                         child: NyListView.separated(
                           child: (BuildContext context, dynamic data) {
                             var listItem = (data as ListItem);
-                            return listItem.widget!;
+                            return listItem.displayWidget!;
                           },
                           data: () {
                             return [
                               ListItem(
                                 'Title',
-                                widget: Text(_place!.name).titleLarge(),
+                                displayWidget: Text(_place!.name).titleLarge(),
                               ),
                               ListItem('Map',
-                                  widget: SizedBox(
+                                  displayWidget: SizedBox(
                                       height: 250,
                                       child: AppleMap(
                                         onMapCreated:
@@ -66,7 +66,7 @@ class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
                                         ]),
                                       ))),
                               ListItem('Image',
-                                  widget: ListTile(
+                                  displayWidget: ListTile(
                                     title: Text('Add Image').titleLarge(),
                                     trailing: Icon(Icons.edit),
                                     onTap: () async {
@@ -79,7 +79,7 @@ class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
                                     },
                                   )),
                               ListItem('Done',
-                                  widget: Button.primary(
+                                  displayWidget: Button.primary(
                                       text: "Done", onPressed: () async {})),
                             ];
                           },

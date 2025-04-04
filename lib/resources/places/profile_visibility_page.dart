@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/app/models/list_item.dart';
 
 class ProfileVisibilityPage extends NyStatefulWidget {
   static RouteView path =
@@ -26,8 +27,19 @@ class _ProfileVisibilityPageState extends NyPage<ProfileVisibilityPage> {
         ],
       ),
       body: SafeArea(
-        child: Container(),
-      ),
+          child: NyListView.separated(
+        child: (context, item) => ListTile(
+          leading: Text(item["title"]).titleLarge(),
+          trailing: Text(item["detail"]).titleMedium(),
+        ),
+        data: () => [
+          {"title": "Places", "detail": "Always"},
+          {"title": "Friends", "detail": "Ask"},
+        ],
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider();
+        },
+      )),
     );
   }
 }
