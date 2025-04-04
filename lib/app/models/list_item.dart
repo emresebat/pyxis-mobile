@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nylo_framework/nylo_framework.dart';
 
 class ListItem {
   final String title;
@@ -8,7 +9,7 @@ class ListItem {
   final Widget? widget;
 
   /// Route to navigate to when the list item is tapped.
-  final String? targetRoute;
+  final RouteView? targetRoute;
 
   ListItem(this.title, {this.detail, this.targetRoute, this.widget});
 }

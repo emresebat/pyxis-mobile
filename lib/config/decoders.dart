@@ -1,5 +1,6 @@
 import 'package:plateau/app/controllers/home_controller.dart';
 import 'package:plateau/app/controllers/places/places_controller.dart';
+import 'package:plateau/app/controllers/places/profile_places_controller.dart';
 import 'package:plateau/app/controllers/places/view_new_place_controller.dart';
 import 'package:plateau/app/controllers/profile/login_controller.dart';
 import 'package:plateau/app/controllers/profile/profile_controller.dart';
@@ -82,6 +83,7 @@ final Map<Type, dynamic> controllers = {
   LoginController: () => LoginController(),
   PlacesController: () => PlacesController(),
   ProfileController: () => ProfileController(),
+  ProfilePlacesController: () => ProfilePlacesController(),
   NewPlaceController: () => NewPlaceController(),
   ViewNewPlaceController: () => ViewNewPlaceController(),
 };

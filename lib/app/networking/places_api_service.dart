@@ -18,7 +18,7 @@ class PlacesApiService extends NyApiService {
         SupabaseAuthInterceptor: SupabaseAuthInterceptor(),
       };
 
-  Future<List<Place>?> list() async {
+  Future<List<Place>?> getPlaces() async {
     return await network<List<Place>>(
       request: (request) => request.get("/places"),
     );

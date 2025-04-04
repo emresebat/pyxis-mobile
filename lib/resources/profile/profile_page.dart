@@ -4,16 +4,23 @@ import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/list_item.dart';
 import 'package:plateau/app/models/profile.dart';
 import 'package:plateau/app/models/profile_summary.dart';
+import 'package:plateau/resources/places/profile_places_page.dart';
+import 'package:plateau/resources/places/profile_history_page.dart';
+import 'package:plateau/resources/places/profile_visibility_page.dart';
+import 'package:plateau/resources/places/profile_wallet_page.dart';
 import 'package:plateau/resources/profile/edit_profile_tab_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/resources/widgets/avatar_widget.dart';
 import 'package:plateau/resources/widgets/safearea_widget.dart';
 
 class ProfilePage extends NyStatefulWidget<ProfileController> {
+  static RouteView path = ("/profile", (_) => ProfilePage());
+
   ProfilePage({super.key}) : super(child: () => _ProfilePageState());
 }
 
 class _ProfilePageState extends NyPage<ProfilePage> {
+  static const String pageCode = "5";
   ProfileSummary? _profileSummary;
   Profile? _profile;
 
@@ -36,7 +43,9 @@ class _ProfilePageState extends NyPage<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('${_profile?.username} \'s Profile'),
+        centerTitle: true,
         actions: [
+          Text(pageCode).titleSmall(),
           TextButton(
               onPressed: () async {
                 var result = await widget.controller.signOut();
@@ -57,8 +66,15 @@ class _ProfilePageState extends NyPage<ProfilePage> {
             return listItem.widget!;
           }
           return ListTile(
-              title: Text(listItem.title).titleMedium(),
-              trailing: Text(listItem.detail ?? '').titleMedium());
+            title: Text(listItem.title).titleMedium(),
+            trailing: Text(listItem.detail ?? '').titleMedium(),
+            onTap: () {
+              if (listItem.targetRoute == null) {
+                return;
+              }
+              routeTo(listItem.targetRoute);
+            },
+          );
         },
         data: (int iteration) {
           return [
@@ -75,10 +91,17 @@ class _ProfilePageState extends NyPage<ProfilePage> {
                   onTap: () => pushTo(EditProfileTab()),
                 )),
             ListItem('Places',
-                detail: '${_profileSummary?.placesCount} Places'),
-            ListItem('Wallet', detail: '${_profileSummary?.wallet}'),
-            ListItem('History', detail: 'Latest Activity'),
-            ListItem('Visibility', detail: '${_profileSummary?.visibility}')
+                detail: '${_profileSummary?.placesCount} Places',
+                targetRoute: ProfilePlacesPage.path),
+            ListItem('Wallet',
+                detail: '${_profileSummary?.wallet}',
+                targetRoute: ProfileWalletPage.path),
+            ListItem('History',
+                detail: 'Latest Activity',
+                targetRoute: ProfileHistoryPage.path),
+            ListItem('Visibility',
+                detail: '${_profileSummary?.visibility}',
+                targetRoute: ProfileVisibilityPage.path)
           ];
         },
         separatorBuilder: (BuildContext context, int index) {

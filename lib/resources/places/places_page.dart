@@ -12,6 +12,8 @@ class PlacesPage extends NyStatefulWidget<PlacesController> {
 }
 
 class _PlacesPageState extends NyPage<PlacesPage> {
+  static const String pageCode = "P ";
+
   List<Place> _places = [];
 
   @override
@@ -26,8 +28,10 @@ class _PlacesPageState extends NyPage<PlacesPage> {
   Widget view(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Places'),
         actions: [
+          Text(pageCode).titleSmall(),
           IconButton(
               icon: Icon(Icons.add),
               tooltip: 'Add',
@@ -36,23 +40,21 @@ class _PlacesPageState extends NyPage<PlacesPage> {
               })
         ],
       ),
-      body: Center(
-        child: NyPullToRefresh.separated(
-          child: (context, item) => ListTile(
-            leading: SizedBox(
-                height: 50,
-                width: 50,
-                child: Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(ImagePlaceholder.get(
-                        item.thumbnailUrl, 50, 50,
-                        text: item.name)))),
-            title: Text(item.name),
-            subtitle: Text(item.description),
-          ),
-          separatorBuilder: (context, index) => Divider(),
-          data: (int iteration) => _places,
+      body: NyPullToRefresh.separated(
+        child: (context, item) => ListTile(
+          leading: SizedBox(
+              height: 50,
+              width: 50,
+              child: Image(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(ImagePlaceholder.get(
+                      item.thumbnailUrl, 50, 50,
+                      text: item.name)))),
+          title: Text(item.name),
+          subtitle: Text(item.description),
         ),
+        separatorBuilder: (context, index) => Divider(),
+        data: (int iteration) => _places,
       ),
     );
   }

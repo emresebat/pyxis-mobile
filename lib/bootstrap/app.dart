@@ -42,7 +42,8 @@ class Main extends StatelessWidget {
                 checkerboardRasterCacheImages: false,
                 checkerboardOffscreenLayers: false,
                 showSemanticsDebugger: false,
-                debugShowCheckedModeBanner: false,
+                debugShowCheckedModeBanner:
+                    getEnv('SHOW_DEBUG_BANNER', defaultValue: false),
                 darkTheme: appThemes.darkTheme,
                 initialRoute: initialRoute,
                 onGenerateRoute: onGenerateRoute,

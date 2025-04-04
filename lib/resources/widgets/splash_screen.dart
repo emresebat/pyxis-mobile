@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nylo_framework/nylo_framework.dart';
 import '/resources/widgets/logo_widget.dart';
 import 'dart:math';
 
@@ -9,7 +10,8 @@ class SplashScreen extends StatelessWidget {
   static MaterialApp app() {
     return MaterialApp(
       home: SplashScreen(),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner:
+          getEnv('SHOW_DEBUG_BANNER', defaultValue: false),
     );
   }
 

@@ -13,6 +13,7 @@ class EditProfileTab extends StatefulWidget {
 }
 
 class _EditProfileTabState extends NyState<EditProfileTab> {
+  static const String pageCode = "10";
   final _usernameController = TextEditingController();
   final _fullNameController = TextEditingController();
   String? _avatarUrl;
@@ -132,7 +133,13 @@ class _EditProfileTabState extends NyState<EditProfileTab> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Edit Profile'),
+        actions: [
+          Text(pageCode).titleSmall(),
+        ],
+      ),
       body: Container(
           padding: const EdgeInsets.all(20),
           child: Column(

@@ -1,5 +1,6 @@
-import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+
+import 'package:plateau/resources/profile/choose_login_page.dart';
 
 /* Auth Route Guard
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ class AuthRouteGuard extends NyRouteGuard {
 
     bool isLoggedIn = (await Auth.isAuthenticated());
     if (!isLoggedIn) {
-      return redirect(HomePage.path);
+      return redirect(ChooseLoginPage.path);
     }
 
     return pageRequest;

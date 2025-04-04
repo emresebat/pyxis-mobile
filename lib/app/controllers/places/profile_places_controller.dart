@@ -5,13 +5,13 @@ import 'package:plateau/app/networking/places_api_service.dart';
 import '/app/controllers/controller.dart';
 import 'package:flutter/widgets.dart';
 
-class PlacesController extends Controller {
+class ProfilePlacesController extends Controller {
   @override
   construct(BuildContext context) {
     super.construct(context);
   }
 
   Future<List<Place>?> list() async {
-    return await api<PlacesApiService>((request) => request.getPlaces());
+    return await api<PlacesApiService>((request) => request.getMyPlaces());
   }
 }
