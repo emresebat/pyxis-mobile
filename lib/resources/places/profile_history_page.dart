@@ -9,7 +9,7 @@ class ProfileHistoryPage extends NyStatefulWidget {
 }
 
 class _ProfileHistoryPageState extends NyPage<ProfileHistoryPage> {
-  static const String pageCode = "7 ";
+  static const String pageCode = "P3 ";
 
   @override
   get init => () {};

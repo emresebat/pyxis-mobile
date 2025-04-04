@@ -4,14 +4,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/bootstrap/app.dart';
 
-class NearmeTab extends StatefulWidget {
-  const NearmeTab({super.key});
+class NearmePage extends NyStatefulWidget {
+  static RouteView path = ("/nearme", (_) => NearmePage());
 
-  @override
-  createState() => _NearmeTabState();
+  NearmePage({super.key}) : super(child: () => _NearmePageState());
 }
 
-class _NearmeTabState extends NyState<NearmeTab> {
+class _NearmePageState extends NyState<NearmePage> {
+  static const String pageCode = "N1 ";
+
   LatLng? _currentLocation;
   bool _isLoading = true;
 
@@ -53,7 +54,10 @@ class _NearmeTabState extends NyState<NearmeTab> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Near Me')),
+      appBar: AppBar(
+          title: Text('Near Me'),
+          centerTitle: true,
+          actions: [Text(pageCode).titleSmall()]),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),

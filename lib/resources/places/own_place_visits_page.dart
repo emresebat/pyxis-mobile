@@ -9,7 +9,7 @@ class OwnPlaceVisitsPage extends NyStatefulWidget {
 }
 
 class _OwnPlaceVisitsPageState extends NyPage<OwnPlaceVisitsPage> {
-  static const String pageCode = "17 ";
+  static const String pageCode = "T2 ";
 
   @override
   LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();

@@ -13,7 +13,7 @@ class EditProfileTab extends StatefulWidget {
 }
 
 class _EditProfileTabState extends NyState<EditProfileTab> {
-  static const String pageCode = "10";
+  static const String pageCode = "P6 ";
   final _usernameController = TextEditingController();
   final _fullNameController = TextEditingController();
   String? _avatarUrl;

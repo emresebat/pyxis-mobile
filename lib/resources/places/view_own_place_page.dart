@@ -1,6 +1,5 @@
 import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/view_own_place_controller.dart';
 import 'package:plateau/app/models/place.dart';
@@ -15,7 +14,7 @@ class ViewOwnPlacePage extends NyStatefulWidget<ViewOwnPlaceController> {
 }
 
 class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
-  static const String pageCode = "16 ";
+  static const String pageCode = "T1 ";
   Place? _place;
 
   @override

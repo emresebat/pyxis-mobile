@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:plateau/app/models/list_item.dart';
 
 class ProfileVisibilityPage extends NyStatefulWidget {
   static RouteView path =
@@ -11,7 +10,7 @@ class ProfileVisibilityPage extends NyStatefulWidget {
 }
 
 class _ProfileVisibilityPageState extends NyPage<ProfileVisibilityPage> {
-  static const String pageCode = "6 ";
+  static const String pageCode = "P2 ";
 
   @override
   get init => () {};

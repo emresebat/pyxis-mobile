@@ -13,7 +13,7 @@ class ProfilePlacesPage extends NyStatefulWidget<ProfilePlacesController> {
 }
 
 class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
-  static const String pageCode = "9 ";
+  static const String pageCode = "P5 ";
 
   List<Place> _places = [];
 

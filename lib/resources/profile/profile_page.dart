@@ -20,7 +20,7 @@ class ProfilePage extends NyStatefulWidget<ProfileController> {
 }
 
 class _ProfilePageState extends NyPage<ProfilePage> {
-  static const String pageCode = "5";
+  static const String pageCode = "P1 ";
   ProfileSummary? _profileSummary;
   Profile? _profile;
 
