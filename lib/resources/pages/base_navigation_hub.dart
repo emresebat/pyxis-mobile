@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plateau/resources/chat/chat_tab_widget.dart';
+import 'package:plateau/resources/chat/chats_page.dart';
 import 'package:plateau/resources/nearme/nearme_page.dart';
 import 'package:plateau/resources/places/places_page.dart';
 import 'package:plateau/resources/profile/profile_page.dart';
@@ -28,7 +28,7 @@ class _BaseNavigationHubState extends NavigationHub<BaseNavigationHub> {
 
   /// Should the state be maintained
   @override
-  bool get maintainState => true;
+  bool get maintainState => false;
 
   /// Navigation pages
   _BaseNavigationHubState()
@@ -58,7 +58,7 @@ class _BaseNavigationHubState extends NavigationHub<BaseNavigationHub> {
             3: NavigationTab(
               title: "Chat",
               page:
-                  ChatTab(), // create using: 'dart run nylo_framework:main make:stateful_widget settings_tab'
+                  ChatsPage(), // create using: 'dart run nylo_framework:main make:stateful_widget settings_tab'
               icon: Icon(Icons.chat_outlined),
               activeIcon: Icon(Icons.chat),
             ),

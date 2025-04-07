@@ -16,6 +16,9 @@ class _NearmePageState extends NyState<NearmePage> {
   LatLng? _currentLocation;
   bool _isLoading = true;
 
+  @override
+  LoadingStyle get loadingStyle => LoadingStyle.none();
+
   late AppleMapController? mapController;
   Map<AnnotationId, Annotation> annotations = <AnnotationId, Annotation>{};
 

@@ -6,6 +6,7 @@ import 'package:plateau/app/controllers/places/view_new_place_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/models/list_item.dart';
 import 'package:plateau/bootstrap/helpers.dart';
+import 'package:plateau/resources/places/edit_new_place_page.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 
 class ViewNewPlacePage extends NyStatefulWidget<ViewNewPlaceController> {
@@ -16,8 +17,10 @@ class ViewNewPlacePage extends NyStatefulWidget<ViewNewPlaceController> {
 
 class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
   static const String pageCode = "P2 ";
-
   Place? _place;
+
+  @override
+  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
 
   @override
   get init => () async {
@@ -86,7 +89,12 @@ class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
                           )),
                       ListItem('Done',
                           displayWidget: Button.primary(
-                              text: "Done", onPressed: () async {})),
+                              text: "Done",
+                              onPressed: () {
+                                routeTo(EditNewPlacePage.path,
+                                    navigationType: NavigationType.pushReplace,
+                                    data: _place?.id);
+                              })),
                     ];
                   },
                   separatorBuilder: (BuildContext context, int index) {

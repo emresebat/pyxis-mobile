@@ -1,3 +1,9 @@
+import 'package:plateau/app/networking/chats_api_service.dart';
+
+import '/app/models/message.dart';
+import '/app/models/chat.dart';
+import '/app/controllers/chats_controller.dart';
+import '../app/controllers/places/edit_new_place_controller.dart';
 import '../app/controllers/profile/edit_profile_controller.dart';
 import '../app/controllers/places/own_place_visits_controller.dart';
 import 'package:plateau/app/controllers/home_controller.dart';
@@ -53,6 +59,16 @@ final Map<Type, dynamic> modelDecoders = {
       List.from(data).map((json) => ProfileSummary.fromJson(json)).toList(),
 
   ProfileSummary: (data) => ProfileSummary.fromJson(data),
+
+  List<Chat>: (data) =>
+      List.from(data).map((json) => Chat.fromJson(json)).toList(),
+
+  Chat: (data) => Chat.fromJson(data),
+
+  List<Message>: (data) =>
+      List.from(data).map((json) => Message.fromJson(json)).toList(),
+
+  Message: (data) => Message.fromJson(data),
 };
 
 /* API Decoders
@@ -70,6 +86,7 @@ final Map<Type, dynamic> apiDecoders = {
 
   PlacesApiService: PlacesApiService(),
   ProfileApiService: ProfileApiService(),
+  ChatsApiService: ChatsApiService(),
 };
 
 /* Controller Decoders
@@ -90,8 +107,9 @@ final Map<Type, dynamic> controllers = {
   NewPlaceController: () => NewPlaceController(),
   ViewNewPlaceController: () => ViewNewPlaceController(),
   ViewOwnPlaceController: () => ViewOwnPlaceController(),
-
   OwnPlaceVisitsController: () => OwnPlaceVisitsController(),
-
   EditProfileController: () => EditProfileController(),
+  EditNewPlaceController: () => EditNewPlaceController(),
+
+  ChatsController: () => ChatsController(),
 };

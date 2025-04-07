@@ -46,3 +46,17 @@ extension HexColor on Color {
               '${blue.toRadixString(16).padLeft(2, '0')}'
           .toUpperCase();
 }
+
+extension DateString on DateTime {
+  String toDateString() {
+    return '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${year.toString().padLeft(2, '0')}';
+  }
+
+  String toTimeString() {
+    return '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  }
+
+  String toDateTimeString() {
+    return '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${year.toString().padLeft(2, '0')} ${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  }
+}

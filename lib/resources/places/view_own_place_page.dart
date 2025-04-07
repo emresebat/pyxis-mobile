@@ -51,7 +51,8 @@ class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
                   return [
                     ListItem(
                       'Title',
-                      displayWidget: Text(_place!.description).titleLarge(),
+                      displayWidget:
+                          Text(_place!.description ?? '').titleLarge(),
                     ),
                     ListItem('Map',
                         displayWidget: SizedBox(

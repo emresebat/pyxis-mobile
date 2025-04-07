@@ -3,8 +3,9 @@ import 'package:nylo_framework/nylo_framework.dart';
 class Place extends Model {
   static StorageKey key = "place";
 
-  final String id, slug, name, description, thumbnailUrl;
-  final bool isVirtual;
+  final String id, slug, name;
+  final String? description, thumbnailUrl;
+  final bool? isVirtual;
   final double lat, lng;
 
   Place(this.id, this.slug, this.name, this.description, this.isVirtual,
@@ -15,8 +16,8 @@ class Place extends Model {
       : id = data['id'],
         slug = data['slug'],
         name = data['name'],
-        description = data['description'],
-        isVirtual = data['is_virtual'] as bool,
+        description = data['description'] ?? '',
+        isVirtual = (data['is_virtual'] ?? false) as bool,
         thumbnailUrl = data['thumbnail_url'] ?? '',
         lat = data['lat'] ?? 0.0,
         lng = data['lng'] ?? 0.0,

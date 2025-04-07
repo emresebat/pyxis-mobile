@@ -1,3 +1,7 @@
+import 'package:plateau/resources/chat/chats_page.dart';
+import 'package:plateau/resources/chat/view_chat_page.dart';
+import 'package:plateau/resources/places/edit_new_place_page.dart';
+
 import '../resources/places/own_place_visits_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -72,6 +76,12 @@ appRouter() => nyRoutes((router) {
       router.add(ViewOwnPlacePage.path, pageTransitionSettings: noTransition);
       router.add(NewPlacePage.path, pageTransitionSettings: noTransition);
       router.add(ViewNewPlacePage.path, pageTransitionSettings: noTransition);
+      router.add(EditNewPlacePage.path, pageTransitionSettings: noTransition);
+
       // nearme
       router.add(OwnPlaceVisitsPage.path);
+
+      // chats
+      router.add(ChatsPage.path, pageTransitionSettings: noTransition);
+      router.add(ViewChatPage.path, pageTransitionSettings: noTransition);
     });

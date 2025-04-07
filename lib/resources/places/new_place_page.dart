@@ -15,6 +15,9 @@ class _NewPlacePageState extends NyPage<NewPlacePage> {
   static const String pageCode = "P1 ";
 
   @override
+  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
+  
+  @override
   get init => () async {
         await widget.controller.getPosition();
       };

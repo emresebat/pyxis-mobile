@@ -24,29 +24,33 @@ class _ProfilePageState extends NyPage<ProfilePage> {
   Profile? _profile;
 
   @override
-  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
+  LoadingStyle get loadingStyle => LoadingStyle.none();
 
   @override
-  get init => () async {
-        var result = await widget.controller.getProfileSummary();
-        if (result != null) {
-          setState(() {
-            _profileSummary = result;
-            _profile = result.profile;
-          });
-        }
-      };
+  get init => () {};
+
+  _loadData() async {
+    var result = await widget.controller.getProfileSummary();
+    if (result != null) {
+      setState(() {
+        _profileSummary = result;
+        _profile = result.profile;
+      });
+    }
+  }
 
   @override
   Widget view(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${_profile?.username} \'s Profile'),
+        title: Text(
+            _profile != null ? '${_profile?.username} \'s Profile' : 'Profile'),
         centerTitle: true,
         actions: [Text(pageCode).titleSmall(color: Colors.white)],
       ),
       body: SafeAreaWidget(
           child: NyPullToRefresh.separated(
+        loadingStyle: LoadingStyle.skeletonizer(),
         child: (BuildContext context, dynamic data) {
           var listItem = (data as ListItem);
           if (listItem.displayWidget != null) {
@@ -63,7 +67,8 @@ class _ProfilePageState extends NyPage<ProfilePage> {
             },
           );
         },
-        data: (int iteration) {
+        data: (int iteration) async {
+          await _loadData();
           return [
             ListItem('Profile',
                 detail: 'Edit',

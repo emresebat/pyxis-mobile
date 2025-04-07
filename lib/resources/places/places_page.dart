@@ -13,23 +13,31 @@ class PlacesPage extends NyStatefulWidget<PlacesController> {
 
 class _PlacesPageState extends NyPage<PlacesPage> {
   static const String pageCode = "";
-
   List<Place> _places = [];
 
   @override
-  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
+  LoadingStyle get loadingStyle => LoadingStyle.none();
 
   @override
-  get init => () async {
-        _places = await widget.controller.list() ?? [];
-      };
+  get init => () {};
+
+  Future<List<Place>> _loadData() async {
+    var result = await widget.controller.list();
+    if (result != null) {
+      setState(() {
+        _places = result;
+      });
+    }
+
+    return _places;
+  }
 
   @override
   Widget view(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text('Places'),
+        centerTitle: true,
         actions: [
           Text(pageCode).titleSmall(color: Colors.white),
           IconButton(
@@ -54,7 +62,7 @@ class _PlacesPageState extends NyPage<PlacesPage> {
           subtitle: Text(item.description),
         ),
         separatorBuilder: (context, index) => Divider(),
-        data: (int iteration) => _places,
+        data: (int iteration) => _loadData(),
       ),
     );
   }

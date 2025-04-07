@@ -36,6 +36,7 @@ dependencies:
   supabase_flutter: ^2.8.4
   image_picker: ^1.1.2
   word_generator: ^0.4.6
+  timeago: ^3.7.0
 
 dev_dependencies:
   rename: ^3.0.2
