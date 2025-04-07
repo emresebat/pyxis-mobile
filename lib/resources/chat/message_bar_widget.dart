@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nylo_framework/nylo_framework.dart';
 
 class MessageBarWidget extends StatefulWidget {
-  const MessageBarWidget({
-    Key? key,
-  }) : super(key: key);
+  final Future<bool> Function(String) onSendMessage;
+
+  const MessageBarWidget({Key? key, required this.onSendMessage})
+      : super(key: key);
 
   @override
   State<MessageBarWidget> createState() => _MessageBarWidgetState();
@@ -33,11 +35,21 @@ class _MessageBarWidgetState extends State<MessageBarWidget> {
                     focusedBorder: InputBorder.none,
                     contentPadding: EdgeInsets.all(8),
                   ),
+                  style: context.textTheme().bodyMedium,
                 ),
               ),
-              TextButton(
-                onPressed: () => {},
-                child: const Text('Send'),
+              IconButton(
+                onPressed: () async {
+                  var success =
+                      await widget.onSendMessage(_textController.text);
+                  if (success) {
+                    _textController.clear();
+                  }
+                },
+                icon: const Icon(
+                  Icons.send,
+                  color: Colors.blue,
+                ),
               ),
             ],
           ),

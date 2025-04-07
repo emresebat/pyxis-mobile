@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/app/models/chat.dart';
+import 'package:plateau/app/models/message.dart';
 import 'package:plateau/app/networking/dio/interceptors/supabase_auth_interceptor.dart';
-import '/config/decoders.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/config/decoders.dart';
 
 class ChatsApiService extends NyApiService {
   ChatsApiService({BuildContext? buildContext})
@@ -26,6 +27,14 @@ class ChatsApiService extends NyApiService {
   Future<Chat?> getById(String id) async {
     return await network<Chat>(
       request: (request) => request.get("/chats/${id}"),
+    );
+  }
+
+  Future<Message?> postMessage(String id, String content) async {
+    return await network<Message>(
+      request: (request) => request.post("/chats/${id}/messages", data: {
+        "content": content,
+      }),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/chats_controller.dart';
 import 'package:plateau/app/models/chat.dart';
 import 'package:plateau/resources/chat/view_chat_page.dart';
+import 'package:plateau/resources/widgets/avatar_widget.dart';
 import '/bootstrap/extensions.dart';
 
 class ChatsPage extends NyStatefulWidget<ChatsController> {
@@ -13,7 +14,6 @@ class ChatsPage extends NyStatefulWidget<ChatsController> {
 
 class _ChatsPageState extends NyState<ChatsPage> {
   static const String pageCode = "C1 ";
-  final String chatsState = "chatsState";
   List<Chat> _chats = [];
 
   @override
@@ -36,23 +36,30 @@ class _ChatsPageState extends NyState<ChatsPage> {
           actions: [Text(pageCode).titleSmall(color: Colors.white)]),
       body: SafeArea(
           child: NyPullToRefresh.separated(
-        stateName: chatsState,
-        loadingStyle: LoadingStyle.skeletonizer(),
-        child: (context, item) {
-          var chat = item as Chat;
-          return ListTile(
-            leading: Text(chat.name).titleMedium(),
-            title: Text(chat.place?.name ?? ''),
-            trailing: Text(chat.createdAt!.toDateString()),
-            onTap: () => routeTo(
-              ViewChatPage.path,
-              data: item.id,
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => Divider(),
-        data: (int iteration) => _loadData(),
-      )),
+              child: (context, item) {
+                var chat = item as Chat;
+                var fromProfile = chat.getFromParticipant();
+                return ListTile(
+                  leading: Avatar(
+                    radius: 20,
+                    imageUrl: fromProfile?.avatarUrl,
+                    initials: fromProfile?.getInitials(),
+                  ),
+                  title: Text(chat.place?.name ?? ''),
+                  trailing: Text(chat.createdAt!.toDateString()),
+                  onTap: () => routeTo(
+                    ViewChatPage.path,
+                    data: item.id,
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => Divider(),
+              data: (int iteration) async {
+                if (iteration == 1) {
+                  return await _loadData();
+                }
+                return [];
+              })),
     );
   }
 }

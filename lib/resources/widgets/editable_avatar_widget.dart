@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:plateau/resources/widgets/buttons/buttons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class EditableAvatar extends StatefulWidget {

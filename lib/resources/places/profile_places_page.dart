@@ -19,12 +19,19 @@ class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
   List<Place> _places = [];
 
   @override
-  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
+  LoadingStyle get loadingStyle => LoadingStyle.none();
 
   @override
-  get init => () async {
-        _places = await widget.controller.list() ?? [];
-      };
+  get init => () {};
+
+  Future<List<Place>> _loadData() async {
+    var result = await widget.controller.list();
+    if (result != null) {
+      _places = result;
+    }
+    return _places;
+  }
+
   @override
   Widget view(BuildContext context) {
     return Scaffold(
@@ -59,7 +66,7 @@ class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
             },
           ),
           separatorBuilder: (context, index) => Divider(),
-          data: (int iteration) => _places,
+          data: (int iteration) => _loadData(),
         ),
       ),
     );

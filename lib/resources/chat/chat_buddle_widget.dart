@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/app/models/message.dart';
-import 'package:plateau/bootstrap/extensions.dart';
+import 'package:plateau/resources/widgets/avatar_widget.dart';
 import 'package:timeago/timeago.dart';
 
 class ChatBubbleWidget extends StatelessWidget {
@@ -14,10 +14,12 @@ class ChatBubbleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> chatContents = [
-      // if (!message.isMine)
-      //   CircleAvatar(
-      //     child: Text(message.profile!.username!.substring(0, 2)),
-      //   ),
+      if (!message.isMine)
+        Avatar(
+          radius: 20,
+          imageUrl: message.profile?.avatarUrl,
+          initials: message.profile?.getInitials(),
+        ),
       const SizedBox(width: 12),
       Flexible(
         child: Container(
@@ -26,8 +28,7 @@ class ChatBubbleWidget extends StatelessWidget {
             horizontal: 12,
           ),
           decoration: BoxDecoration(
-            color:
-                message.isMine ? Colors.greenAccent : Colors.grey[300],
+            color: message.isMine ? Colors.greenAccent : Colors.grey[300],
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(message.content),

@@ -1,11 +1,10 @@
 import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/app/controllers/controller.dart';
 import 'package:plateau/app/models/create_place_request.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/networking/places_api_service.dart';
-
-import '/app/controllers/controller.dart';
 import 'package:flutter/widgets.dart';
 
 class NewPlaceController extends Controller {

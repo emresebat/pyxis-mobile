@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/app/models/profile_summary.dart';
 import 'package:plateau/app/networking/dio/interceptors/supabase_auth_interceptor.dart';
-import '/config/decoders.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/config/decoders.dart';
 
 class ProfileApiService extends NyApiService {
   ProfileApiService({BuildContext? buildContext})

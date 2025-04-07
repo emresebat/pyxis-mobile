@@ -17,14 +17,19 @@ class _ViewChatPageState extends NyState<ViewChatPage> {
   Chat? _chat;
 
   @override
-  LoadingStyle get loadingStyle => LoadingStyle.skeletonizer();
+  LoadingStyle get loadingStyle => LoadingStyle.none();
 
   @override
-  get init => () async {
-        var chatId = widget.data() as String;
-        _chat = await widget.controller.getChat(chatId);
-        _chat?.messages?.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
-      };
+  get init => () async {};
+
+  Future<List<Message>?> _loadData() async {
+    var chatId = widget.data() as String;
+    _chat = await widget.controller.getChat(chatId);
+    _chat?.messages?.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+    setState(() {});
+    return _chat?.messages;
+  }
+
   @override
   Widget view(BuildContext context) {
     return Scaffold(
@@ -36,10 +41,22 @@ class _ViewChatPageState extends NyState<ViewChatPage> {
           child: NyPullToRefresh.separated(
         reverse: true,
         child: (context, item) => ChatBubbleWidget(message: item as Message),
-        separatorBuilder: (context, index) => Divider(),
-        data: (int iteration) => _chat?.messages ?? [],
+        separatorBuilder: (context, index) => SizedBox.shrink(),
+        data: (int iteration) async {
+          if (iteration == 1) {
+            return await _loadData();
+          }
+          return [];
+        },
       )),
-      bottomNavigationBar: MessageBarWidget(),
+      bottomNavigationBar: MessageBarWidget(onSendMessage: (content) async {
+        final message = await widget.controller.postMessage(_chat!.id, content);
+        if (message != null) {
+          _chat?.messages?.insert(0, message);
+          setState(() {});
+        }
+        return message != null;
+      }),
     );
   }
 }

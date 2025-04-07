@@ -23,6 +23,14 @@ class Place extends Model {
         lng = data['lng'] ?? 0.0,
         super(key: key);
 
+  getInitials() {
+    final names = slug.split(' ');
+    if (names.length > 1) {
+      return names[0][0] + names[1][0];
+    }
+    return names[0][0];
+  }
+
   @override
   toJson() => {
         'id': id,

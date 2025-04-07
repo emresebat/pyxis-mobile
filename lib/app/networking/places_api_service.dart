@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:plateau/app/models/create_place_request.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/networking/dio/interceptors/supabase_auth_interceptor.dart';
-import '/config/decoders.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/config/decoders.dart';
 
 class PlacesApiService extends NyApiService {
   PlacesApiService({BuildContext? buildContext})

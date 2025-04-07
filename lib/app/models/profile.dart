@@ -3,16 +3,18 @@ import 'package:nylo_framework/nylo_framework.dart';
 class Profile extends Model {
   static StorageKey key = 'profile';
 
+  final String id;
   final String? username, email, fullName, avatarUrl;
 
-  Profile(this.username, this.email, this.fullName, this.avatarUrl)
+  Profile(this.username, this.email, this.fullName, this.avatarUrl, this.id)
       : super(key: key);
 
   Profile.fromJson(dynamic data)
-      : username = data['username'],
-        email = data['email'],
-        fullName = data['full_name'],
-        avatarUrl = data['avatar_url'],
+      : id = data['id'],
+        username = data['username'],
+        email = data['email'] ?? '',
+        fullName = data['full_name'] ?? '',
+        avatarUrl = data['avatar_url'] ?? '',
         super(key: key);
 
   getInitials() {
@@ -30,6 +32,7 @@ class Profile extends Model {
 
   @override
   toJson() => {
+        "id": id,
         "username": username,
         "email": email,
         "full_name": fullName,
