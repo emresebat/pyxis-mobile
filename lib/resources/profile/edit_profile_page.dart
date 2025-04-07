@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:plateau/app/controllers/profile/edit_profile_controller.dart';
 import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/profile.dart';
+import 'package:plateau/resources/widgets/buttons/buttons.dart';
 import 'package:plateau/resources/widgets/editable_avatar_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class EditProfileTab extends StatefulWidget {
-  const EditProfileTab({super.key});
+class EditProfilePage extends NyStatefulWidget<EditProfileController> {
+  static RouteView path = ("/edit-profile", (_) => EditProfilePage());
 
-  @override
-  createState() => _EditProfileTabState();
+  EditProfilePage({super.key}) : super(child: () => _EditProfilePageState());
 }
 
-class _EditProfileTabState extends NyState<EditProfileTab> {
-  static const String pageCode = "P6 ";
+class _EditProfilePageState extends NyState<EditProfilePage> {
+  static const String pageCode = "U6 ";
   final _usernameController = TextEditingController();
   final _fullNameController = TextEditingController();
   String? _avatarUrl;
@@ -137,7 +138,7 @@ class _EditProfileTabState extends NyState<EditProfileTab> {
         centerTitle: true,
         title: const Text('Edit Profile'),
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: Container(
@@ -162,12 +163,12 @@ class _EditProfileTabState extends NyState<EditProfileTab> {
                 decoration: const InputDecoration(labelText: 'Full Name'),
               ),
               const SizedBox(height: 18),
-              ElevatedButton(
+              Button.primary(
                 onPressed: _loading ? null : _updateProfile,
-                child: Text(_loading ? 'Saving...' : 'Update'),
+                text: _loading ? 'Saving...' : 'Update',
               ),
               const SizedBox(height: 18),
-              TextButton(onPressed: _signOut, child: const Text('Sign Out')),
+              Button.secondary(onPressed: _signOut, text: 'Sign Out'),
             ],
           )),
     );

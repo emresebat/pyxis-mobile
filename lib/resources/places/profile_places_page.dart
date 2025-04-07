@@ -13,7 +13,7 @@ class ProfilePlacesPage extends NyStatefulWidget<ProfilePlacesController> {
 }
 
 class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
-  static const String pageCode = "P5 ";
+  static const String pageCode = "U5 ";
 
   List<Place> _places = [];
 
@@ -31,7 +31,7 @@ class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
         title: Text("Profile Places"),
         centerTitle: true,
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: SafeArea(

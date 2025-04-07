@@ -9,7 +9,7 @@ class ProfileWalletPage extends NyStatefulWidget {
 }
 
 class _ProfileWalletPageState extends NyPage<ProfileWalletPage> {
-  static const String pageCode = "P4 ";
+  static const String pageCode = "U4 ";
 
   @override
   get init => () {};
@@ -21,7 +21,7 @@ class _ProfileWalletPageState extends NyPage<ProfileWalletPage> {
         title: Text("Profile Wallet"),
         centerTitle: true,
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: SafeArea(

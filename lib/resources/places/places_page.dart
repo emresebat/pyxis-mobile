@@ -31,7 +31,7 @@ class _PlacesPageState extends NyPage<PlacesPage> {
         centerTitle: true,
         title: Text('Places'),
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
           IconButton(
               icon: Icon(Icons.add),
               tooltip: 'Add',

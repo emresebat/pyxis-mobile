@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:plateau/app/controllers/profile/profile_controller.dart';
-import 'package:plateau/app/events/logout_event.dart';
 import 'package:plateau/app/models/list_item.dart';
 import 'package:plateau/app/models/profile.dart';
 import 'package:plateau/app/models/profile_summary.dart';
@@ -8,7 +7,7 @@ import 'package:plateau/resources/places/profile_places_page.dart';
 import 'package:plateau/resources/places/profile_history_page.dart';
 import 'package:plateau/resources/places/profile_visibility_page.dart';
 import 'package:plateau/resources/places/profile_wallet_page.dart';
-import 'package:plateau/resources/profile/edit_profile_tab_widget.dart';
+import 'package:plateau/resources/profile/edit_profile_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/resources/widgets/avatar_widget.dart';
 import 'package:plateau/resources/widgets/safearea_widget.dart';
@@ -20,7 +19,7 @@ class ProfilePage extends NyStatefulWidget<ProfileController> {
 }
 
 class _ProfilePageState extends NyPage<ProfilePage> {
-  static const String pageCode = "P1 ";
+  static const String pageCode = "U1 ";
   ProfileSummary? _profileSummary;
   Profile? _profile;
 
@@ -44,19 +43,7 @@ class _ProfilePageState extends NyPage<ProfilePage> {
       appBar: AppBar(
         title: Text('${_profile?.username} \'s Profile'),
         centerTitle: true,
-        actions: [
-          Text(pageCode).titleSmall(),
-          TextButton(
-              onPressed: () async {
-                var result = await widget.controller.signOut();
-                if (result.success) {
-                  event<LogoutEvent>();
-                } else {
-                  showToastOops(description: result.error);
-                }
-              },
-              child: const Text('Sign Out')),
-        ],
+        actions: [Text(pageCode).titleSmall(color: Colors.white)],
       ),
       body: SafeAreaWidget(
           child: NyPullToRefresh.separated(
@@ -88,7 +75,7 @@ class _ProfilePageState extends NyPage<ProfilePage> {
                   ),
                   title: Text(_profile?.fullName ?? '').titleLarge(),
                   trailing: Icon(Icons.edit),
-                  onTap: () => pushTo(EditProfileTab()),
+                  onTap: () => pushTo(EditProfilePage()),
                 )),
             ListItem('Places',
                 detail: '${_profileSummary?.placesCount} Places',
@@ -100,7 +87,7 @@ class _ProfilePageState extends NyPage<ProfilePage> {
                 detail: 'Latest Activity', pushToWidget: ProfileHistoryPage()),
             ListItem('Visibility',
                 detail: '${_profileSummary?.visibility}',
-                pushToWidget: ProfileVisibilityPage())
+                pushToWidget: ProfileVisibilityPage()),
           ];
         },
         separatorBuilder: (BuildContext context, int index) {

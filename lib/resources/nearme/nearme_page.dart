@@ -57,7 +57,7 @@ class _NearmePageState extends NyState<NearmePage> {
       appBar: AppBar(
           title: Text('Near Me'),
           centerTitle: true,
-          actions: [Text(pageCode).titleSmall()]),
+          actions: [Text(pageCode).titleSmall(color: Colors.white)]),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),

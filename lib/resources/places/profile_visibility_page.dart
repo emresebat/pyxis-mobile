@@ -10,7 +10,7 @@ class ProfileVisibilityPage extends NyStatefulWidget {
 }
 
 class _ProfileVisibilityPageState extends NyPage<ProfileVisibilityPage> {
-  static const String pageCode = "P2 ";
+  static const String pageCode = "U2 ";
 
   @override
   get init => () {};
@@ -22,7 +22,7 @@ class _ProfileVisibilityPageState extends NyPage<ProfileVisibilityPage> {
         title: Text("Profile Visibility"),
         centerTitle: true,
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: SafeArea(

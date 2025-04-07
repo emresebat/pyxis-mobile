@@ -21,13 +21,13 @@ class LightThemeColors implements ColorStyles {
 
   // app bar
   @override
-  Color get appBarBackground => Colors.blue;
+  Color get appBarBackground => Colors.black;
   @override
   Color get appBarPrimaryContent => Colors.white;
 
   // buttons
   @override
-  Color get buttonBackground => Colors.blue;
+  Color get buttonBackground => Colors.pinkAccent;
   @override
   Color get buttonContent => Colors.white;
 

@@ -36,7 +36,7 @@ class _ViewOwnPlacePageState extends NyPage<ViewOwnPlacePage> {
         title: Text(_place?.name ?? "View Own Place"),
         centerTitle: true,
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: SafeArea(

@@ -14,6 +14,8 @@ class ViewNewPlacePage extends NyStatefulWidget<ViewNewPlaceController> {
 }
 
 class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
+  static const String pageCode = "P2 ";
+
   Place? _place;
 
   @override
@@ -28,7 +30,10 @@ class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("View New Place")),
+      appBar: AppBar(
+          title: Text("View New Place"),
+          centerTitle: true,
+          actions: [Text(pageCode).titleSmall(color: Colors.white)]),
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: _place != null

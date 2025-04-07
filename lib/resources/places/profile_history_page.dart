@@ -9,7 +9,7 @@ class ProfileHistoryPage extends NyStatefulWidget {
 }
 
 class _ProfileHistoryPageState extends NyPage<ProfileHistoryPage> {
-  static const String pageCode = "P3 ";
+  static const String pageCode = "U3 ";
 
   @override
   get init => () {};
@@ -21,7 +21,7 @@ class _ProfileHistoryPageState extends NyPage<ProfileHistoryPage> {
         title: Text("Profile History"),
         centerTitle: true,
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: SafeArea(

@@ -12,6 +12,8 @@ class NewPlacePage extends NyStatefulWidget<NewPlaceController> {
 }
 
 class _NewPlacePageState extends NyPage<NewPlacePage> {
+  static const String pageCode = "P1 ";
+
   @override
   get init => () async {
         await widget.controller.getPosition();
@@ -20,7 +22,10 @@ class _NewPlacePageState extends NyPage<NewPlacePage> {
   @override
   Widget view(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("New Place")),
+      appBar: AppBar(
+          title: Text("New Place"),
+          centerTitle: true,
+          actions: [Text(pageCode).titleSmall(color: Colors.white)]),
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: widget.controller.positionReady

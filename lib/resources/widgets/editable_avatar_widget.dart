@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:plateau/resources/widgets/buttons/buttons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class EditableAvatar extends StatefulWidget {
@@ -89,9 +90,10 @@ class _EditableAvatarState extends NyState<EditableAvatar> {
         //     height: 150,
         //     fit: BoxFit.cover,
         //   ),
-        ElevatedButton(
+        IconButton(
           onPressed: _isLoading ? null : _upload,
-          child: const Text('Upload'),
+          icon: Icon(Icons.photo),
+          iconSize: 30,
         ),
       ],
     );

@@ -24,7 +24,7 @@ class _OwnPlaceVisitsPageState extends NyPage<OwnPlaceVisitsPage> {
         title: Text("Visits"),
         centerTitle: true,
         actions: [
-          Text(pageCode).titleSmall(),
+          Text(pageCode).titleSmall(color: Colors.white),
         ],
       ),
       body: SafeArea(
