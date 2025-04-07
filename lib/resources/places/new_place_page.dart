@@ -29,50 +29,43 @@ class _NewPlacePageState extends NyPage<NewPlacePage> {
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: widget.controller.positionReady
-            ? SizedBox(
-                height: 600,
-                child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: Container(
-                        padding: const EdgeInsets.all(25),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                                height: 250,
-                                child: AppleMap(
-                                  onMapCreated: widget.controller.onMapCreated,
-                                  initialCameraPosition: CameraPosition(
-                                    target: widget.controller.currentCoords,
-                                    zoom: 15.0,
-                                  ),
-                                  annotations: Set<Annotation>.of([
-                                    widget.controller.currentLocationAnnotation
-                                  ]),
-                                )),
-                            const SizedBox(height: 18),
-                            Button.primary(
-                                text: "Create New Place",
-                                onPressed: () async {
-                                  var place =
-                                      await widget.controller.createPlace();
-                                  if (place != null) {
-                                    routeTo(ViewNewPlacePage.path,
-                                        navigationType:
-                                            NavigationType.pushReplace,
-                                        data: place.id);
-                                  } else {
-                                    showToastOops(
-                                        description: "Failed to create place");
-                                  }
-                                }),
-                            const SizedBox(height: 18),
-                            Button.secondary(
-                                text: "Cancel",
-                                onPressed: () {
-                                  pop();
-                                }),
-                          ],
-                        ))))
+            ? Container(
+                padding: const EdgeInsets.all(25),
+                child: Column(
+                  children: [
+                    SizedBox(
+                        height: 250,
+                        child: AppleMap(
+                          onMapCreated: widget.controller.onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: widget.controller.currentCoords,
+                            zoom: 15.0,
+                          ),
+                          annotations: Set<Annotation>.of(
+                              [widget.controller.currentLocationAnnotation]),
+                        )),
+                    const SizedBox(height: 18),
+                    Button.primary(
+                        text: "Create New Place",
+                        onPressed: () async {
+                          var place = await widget.controller.createPlace();
+                          if (place != null) {
+                            routeTo(ViewNewPlacePage.path,
+                                navigationType: NavigationType.pushReplace,
+                                data: place.id);
+                          } else {
+                            showToastOops(
+                                description: "Failed to create place");
+                          }
+                        }),
+                    const SizedBox(height: 18),
+                    Button.secondary(
+                        text: "Cancel",
+                        onPressed: () {
+                          pop();
+                        }),
+                  ],
+                ))
             : Container(),
       ),
     );

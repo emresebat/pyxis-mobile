@@ -3,6 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/profile_places_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/bootstrap/helpers.dart';
+import 'package:plateau/resources/places/new_place_page.dart';
 import 'package:plateau/resources/places/view_own_place_page.dart';
 
 class ProfilePlacesPage extends NyStatefulWidget<ProfilePlacesController> {
@@ -32,6 +33,12 @@ class _ProfilePlacesPageState extends NyPage<ProfilePlacesPage> {
         centerTitle: true,
         actions: [
           Text(pageCode).titleSmall(color: Colors.white),
+          IconButton(
+              icon: Icon(Icons.add),
+              tooltip: 'Add',
+              onPressed: () {
+                routeTo(NewPlacePage.path);
+              })
         ],
       ),
       body: SafeArea(

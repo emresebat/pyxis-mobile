@@ -5,6 +5,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/places/view_new_place_controller.dart';
 import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/models/list_item.dart';
+import 'package:plateau/bootstrap/helpers.dart';
 import 'package:plateau/resources/widgets/buttons/buttons.dart';
 
 class ViewNewPlacePage extends NyStatefulWidget<ViewNewPlaceController> {
@@ -37,61 +38,61 @@ class _ViewNewPlacePageState extends NyPage<ViewNewPlacePage> {
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: _place != null
-            ? SizedBox(
-                height: 600,
-                child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: Container(
-                        padding: const EdgeInsets.all(25),
-                        child: NyListView.separated(
-                          child: (BuildContext context, dynamic data) {
-                            var listItem = (data as ListItem);
-                            return listItem.displayWidget!;
-                          },
-                          data: () {
-                            return [
-                              ListItem(
-                                'Title',
-                                displayWidget: Text(_place!.name).titleLarge(),
-                              ),
-                              ListItem('Map',
-                                  displayWidget: SizedBox(
-                                      height: 250,
-                                      child: AppleMap(
-                                        onMapCreated:
-                                            widget.controller.onMapCreated,
-                                        initialCameraPosition: CameraPosition(
-                                          target:
-                                              widget.controller.currentCoords,
-                                          zoom: 15.0,
-                                        ),
-                                        annotations: Set<Annotation>.of([
-                                          widget.controller
-                                              .currentLocationAnnotation
-                                        ]),
-                                      ))),
-                              ListItem('Image',
-                                  displayWidget: ListTile(
-                                    title: Text('Add Image').titleLarge(),
-                                    trailing: Icon(Icons.edit),
-                                    onTap: () async {
-                                      final picker = ImagePicker();
-                                      final imageFile = await picker.pickImage(
-                                        source: ImageSource.gallery,
-                                        maxWidth: 300,
-                                        maxHeight: 300,
-                                      );
-                                    },
-                                  )),
-                              ListItem('Done',
-                                  displayWidget: Button.primary(
-                                      text: "Done", onPressed: () async {})),
-                            ];
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return Divider();
-                          },
-                        ))))
+            ? Container(
+                padding: const EdgeInsets.all(25),
+                child: NyListView.separated(
+                  child: (BuildContext context, dynamic data) {
+                    var listItem = (data as ListItem);
+                    return listItem.displayWidget!;
+                  },
+                  data: () {
+                    return [
+                      ListItem(
+                        'Title',
+                        displayWidget: Text(_place!.name).titleLarge(),
+                      ),
+                      ListItem('Map',
+                          displayWidget: SizedBox(
+                              height: 250,
+                              child: AppleMap(
+                                onMapCreated: widget.controller.onMapCreated,
+                                initialCameraPosition: CameraPosition(
+                                  target: widget.controller.currentCoords,
+                                  zoom: 15.0,
+                                ),
+                                annotations: Set<Annotation>.of([
+                                  widget.controller.currentLocationAnnotation
+                                ]),
+                              ))),
+                      ListItem('Image',
+                          displayWidget: ListTile(
+                            leading: SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(ImagePlaceholder.get(
+                                        _place?.thumbnailUrl, 50, 50,
+                                        text: _place?.name)))),
+                            trailing: Text('Add Image').titleLarge(),
+                            onTap: () async {
+                              final picker = ImagePicker();
+                              final imageFile = await picker.pickImage(
+                                source: ImageSource.gallery,
+                                maxWidth: 300,
+                                maxHeight: 300,
+                              );
+                            },
+                          )),
+                      ListItem('Done',
+                          displayWidget: Button.primary(
+                              text: "Done", onPressed: () async {})),
+                    ];
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider();
+                  },
+                ))
             : Container(),
       ),
     );

@@ -70,9 +70,8 @@ appRouter() => nyRoutes((router) {
       // places
       router.add(PlacesPage.path, pageTransitionSettings: noTransition);
       router.add(ViewOwnPlacePage.path, pageTransitionSettings: noTransition);
-      router.add(NewPlacePage.path, transition: PageTransitionType.bottomToTop);
-      router.add(ViewNewPlacePage.path,
-          transition: PageTransitionType.bottomToTop);
+      router.add(NewPlacePage.path, pageTransitionSettings: noTransition);
+      router.add(ViewNewPlacePage.path, pageTransitionSettings: noTransition);
       // nearme
       router.add(OwnPlaceVisitsPage.path);
-});
+    });
