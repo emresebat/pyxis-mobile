@@ -1,9 +1,8 @@
-import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/app/controllers/controller.dart';
 import 'package:plateau/app/models/chat.dart';
 import 'package:plateau/app/models/message.dart';
-import 'package:plateau/app/networking/chats_api_service.dart';
 import 'package:flutter/widgets.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ChatsController extends Controller {
   @override
@@ -12,20 +11,47 @@ class ChatsController extends Controller {
   }
 
   Future<List<Chat>?> getChats() async {
-    return await api<ChatsApiService>((request) => request.getChats());
+    final supabase = Supabase.instance.client;
+    final userId = supabase.auth.currentUser!.id;
+    final data = await supabase.from('chat_participants').select('''
+        chat:chats(
+            id, name, created_at,
+            participants:chat_participants (
+                profile:profiles(id, username, full_name, avatar_url)
+        ),         
+        place:places(id, slug, name))''').eq('profile_id', userId);
+    return data.map<Chat>((json) => Chat.fromJson(json['chat'])).toList();
   }
 
   Future<Chat?> getChat(String id) async {
-    return await api<ChatsApiService>(
-      (request) => request.getById(id),
-      onError: (dioException) => null,
-    );
+    final supabase = Supabase.instance.client;
+
+    final data = await supabase.from('chats').select('''
+        id, name, created_at,
+        messages (id, profile_id, created_at, content, 
+            profile:profiles(id, username, full_name, avatar_url)
+        ), 
+        participants:chat_participants (
+            profile:profiles(id, username, full_name, avatar_url)
+        ), 
+        place:places(id, slug, name)''').eq('id', id).single();
+
+    return Chat.fromJson(data);
   }
 
   Future<Message?> postMessage(String id, String content) async {
-    return await api<ChatsApiService>(
-      (request) => request.postMessage(id, content),
-      onError: (dioException) => null,
-    );
+    final supabase = Supabase.instance.client;
+    final userId = supabase.auth.currentUser!.id;
+
+    final data = await supabase.from('messages').insert({
+      'chat_id': id,
+      'profile_id': userId,
+      'content': content
+    }).select('''
+        id, profile_id, created_at, content,
+        profile:profiles(id, username, full_name, avatar_url)
+        ''').single();
+
+    return Message.fromJson(data);
   }
 }

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:plateau/app/models/profile_summary.dart';
+import 'package:plateau/app/models/create_place_request.dart';
+import 'package:plateau/app/models/place.dart';
 import 'package:plateau/app/networking/dio/interceptors/supabase_auth_interceptor.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:plateau/config/decoders.dart';
 
-class ProfileApiService extends NyApiService {
-  ProfileApiService({BuildContext? buildContext})
+class SupabaseEdgeApiService extends NyApiService {
+  SupabaseEdgeApiService({BuildContext? buildContext})
       : super(buildContext, decoders: modelDecoders);
 
   @override
-  String get baseUrl => getEnv('API_BASE_URL');
+  String get baseUrl => getEnv('SUPABASE_EDGE_URL');
 
   @override
   Map<Type, Interceptor> get interceptors => {
@@ -17,9 +18,10 @@ class ProfileApiService extends NyApiService {
         SupabaseAuthInterceptor: SupabaseAuthInterceptor(),
       };
 
-  Future<ProfileSummary?> summary() async {
-    return await network<ProfileSummary>(
-      request: (request) => request.get("/profile/summary"),
+  Future<Place?> createPlace(CreatePlaceRequest payload) async {
+    return await network<Place>(
+      request: (request) =>
+          request.post("/create-new-place", data: payload.toJson()),
     );
   }
 }

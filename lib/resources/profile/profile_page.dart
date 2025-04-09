@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:plateau/app/controllers/profile/profile_controller.dart';
 import 'package:plateau/app/models/list_item.dart';
 import 'package:plateau/app/models/profile.dart';
-import 'package:plateau/app/models/profile_summary.dart';
 import 'package:plateau/resources/places/profile_places_page.dart';
 import 'package:plateau/resources/places/profile_history_page.dart';
 import 'package:plateau/resources/places/profile_visibility_page.dart';
@@ -20,7 +19,6 @@ class ProfilePage extends NyStatefulWidget<ProfileController> {
 
 class _ProfilePageState extends NyPage<ProfilePage> {
   static const String pageCode = "U1 ";
-  ProfileSummary? _profileSummary;
   Profile? _profile;
 
   @override
@@ -30,11 +28,10 @@ class _ProfilePageState extends NyPage<ProfilePage> {
   get init => () {};
 
   _loadData() async {
-    var result = await widget.controller.getProfileSummary();
+    var result = await widget.controller.getProfile();
     if (result != null) {
       setState(() {
-        _profileSummary = result;
-        _profile = result.profile;
+        _profile = result;
       });
     }
   }
@@ -83,15 +80,15 @@ class _ProfilePageState extends NyPage<ProfilePage> {
                   onTap: () => pushTo(EditProfilePage()),
                 )),
             ListItem('Places',
-                detail: '${_profileSummary?.placesCount} Places',
+                detail: '${_profile?.placesCount} Places',
                 pushToWidget: ProfilePlacesPage()),
             ListItem('Wallet',
-                detail: '${_profileSummary?.wallet}',
+                detail: '${_profile?.wallet}',
                 pushToWidget: ProfileWalletPage()),
             ListItem('History',
                 detail: 'Latest Activity', pushToWidget: ProfileHistoryPage()),
             ListItem('Visibility',
-                detail: '${_profileSummary?.visibility}',
+                detail: '${_profile?.visibility}',
                 pushToWidget: ProfileVisibilityPage()),
           ];
         },

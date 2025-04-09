@@ -3,10 +3,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class SupabaseAuthInterceptor extends Interceptor {
-  final supabase = Supabase.instance.client;
-
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final supabase = Supabase.instance.client;
+
     String? bearerToken = supabase.auth.currentSession?.accessToken;
     String? refreshToken = supabase.auth.currentSession?.refreshToken;
 

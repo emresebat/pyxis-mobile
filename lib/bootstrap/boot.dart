@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '/resources/widgets/splash_screen.dart';
 import '/bootstrap/app.dart';
 import '/config/providers.dart';
@@ -42,9 +41,6 @@ class Boot {
 _setup() async {
   // 3 seconds splash screen
   await Future.delayed(const Duration(seconds: 3));
-
-  await Supabase.initialize(
-      url: getEnv('SUPABASE_URL'), anonKey: getEnv('SUPABASE_ANONKEY'));
 
   bool serviceEnabled;
   LocationPermission permission;
