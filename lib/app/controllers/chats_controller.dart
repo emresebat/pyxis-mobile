@@ -52,6 +52,19 @@ class ChatsController extends Controller {
         profile:profiles(id, username, full_name, avatar_url)
         ''').single();
 
-    return Message.fromJson(data);
+    return Message.fromJson(data, userId: userId);
+  }
+
+  Stream<List<Message>> getMessagesStream(String chatId) {
+    final supabase = Supabase.instance.client;
+    final userId = supabase.auth.currentUser!.id;
+    final messagesStream = supabase
+        .from('messages')
+        .stream(primaryKey: ['id'])
+        .eq('chat_id', chatId)
+        .order('created_at')
+        .map((maps) =>
+            maps.map((map) => Message.fromJson(map, userId: userId)).toList());
+    return messagesStream;
   }
 }
